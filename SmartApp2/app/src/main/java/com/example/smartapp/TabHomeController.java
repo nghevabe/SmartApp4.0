@@ -29,7 +29,7 @@ import java.util.List;
 
 public class TabHomeController extends Fragment {
 
-    Button led01, led02, led03;
+
     RecyclerView rv;
     MQTTHelper mqttHelper;
 
@@ -40,25 +40,26 @@ public class TabHomeController extends Fragment {
 
         View view = inflater.inflate(R.layout.tab_controller, container, false);
 
-        led01 = (Button) view.findViewById(R.id.btnLed1);
-        led02 = (Button) view.findViewById(R.id.btnLed2);
-        led03 = (Button) view.findViewById(R.id.btnLed3);
 
-        String[] data = {"đèn phòng khách", "đèn ngủ", "đèn bàn", "đèn bếp", "đèn sân", "đèn học"};
         ArrayList<ElectricDevice> lstDevice = new ArrayList<>();
 
 
         ElectricDevice device1 = new ElectricDevice("1","Đèn ngủ","light","none");
         ElectricDevice device2 = new ElectricDevice("2","Đèn học","light","none");
         ElectricDevice device3 = new ElectricDevice("3","Đèn bếp","light","none");
+        //ElectricDevice device4 = new ElectricDevice("4","Đèn sân","light","none");
 
         lstDevice.add(device1);
         lstDevice.add(device2);
         lstDevice.add(device3);
+        //lstDevice.add(device4);
 
         RecyclerView recyclerView = view.findViewById(R.id.rv);
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), numberOfColumns));
+
+
+
         adapter = new MyRecyclerViewAdapter(getActivity().getApplicationContext(), lstDevice);
 
         recyclerView.setAdapter(adapter);
@@ -69,32 +70,7 @@ public class TabHomeController extends Fragment {
 
 
 
-        led01.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                SentMessege("0002550001");
-
-            }
-        });
-
-        led02.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                SentMessege("0002550002");
-
-            }
-        });
-
-        led03.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                SentMessege("0002550003");
-
-            }
-        });
 
         //startMqtt();
 
