@@ -71,6 +71,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Red"
+        android:background="@color/colorRed"
         app:layout_constraintBottom_toTopOf="@+id/line3"
         app:layout_constraintEnd_toStartOf="@+id/line4"
         app:layout_constraintStart_toStartOf="@+id/line1"
@@ -85,6 +86,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Green"
+        android:background="@color/colorGreen"
         app:layout_constraintBottom_toTopOf="@+id/line3"
         app:layout_constraintEnd_toStartOf="@+id/line5"
         app:layout_constraintStart_toStartOf="@+id/line4"
@@ -99,6 +101,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Blue"
+        android:background="@color/colorBlue"
         app:layout_constraintBottom_toTopOf="@+id/line3"
         app:layout_constraintEnd_toStartOf="@+id/line"
         app:layout_constraintStart_toStartOf="@+id/line5"
@@ -113,6 +116,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Yellow"
+        android:background="@color/colorYellow"
         app:layout_constraintBottom_toTopOf="@+id/line7"
         app:layout_constraintEnd_toStartOf="@+id/line4"
         app:layout_constraintStart_toStartOf="@+id/line1"
@@ -127,6 +131,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Violet"
+        android:background="@color/colorViolet"
         app:layout_constraintBottom_toTopOf="@+id/line7"
         app:layout_constraintEnd_toStartOf="@+id/line5"
         app:layout_constraintStart_toStartOf="@+id/line4"
@@ -141,6 +146,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Aqua"
+        android:background="@color/colorAqua"
         app:layout_constraintBottom_toTopOf="@+id/line7"
         app:layout_constraintEnd_toStartOf="@+id/line"
         app:layout_constraintStart_toStartOf="@+id/line5"
@@ -155,23 +161,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="White"
+        android:background="@color/colorCard"
         app:layout_constraintBottom_toTopOf="@+id/line8"
         app:layout_constraintEnd_toStartOf="@+id/line4"
         app:layout_constraintStart_toStartOf="@+id/line1"
-        app:layout_constraintTop_toTopOf="@+id/line7" />
-
-    <Button
-        android:id="@+id/btnPower"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Off"
-        app:layout_constraintBottom_toTopOf="@+id/line8"
-        app:layout_constraintEnd_toStartOf="@+id/line5"
-        app:layout_constraintStart_toStartOf="@+id/line4"
         app:layout_constraintTop_toTopOf="@+id/line7" />
 
     <Button
@@ -183,6 +176,21 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Custom"
+        android:background="@color/colorDark"
+        app:layout_constraintBottom_toTopOf="@+id/line8"
+        app:layout_constraintEnd_toStartOf="@+id/line5"
+        app:layout_constraintStart_toStartOf="@+id/line4"
+        app:layout_constraintTop_toTopOf="@+id/line7" />
+
+    <Button
+        android:id="@+id/btnPower"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Off"
         app:layout_constraintBottom_toTopOf="@+id/line8"
         app:layout_constraintEnd_toStartOf="@+id/line"
         app:layout_constraintStart_toStartOf="@+id/line5"
@@ -201,6 +209,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/line8" />
+
+    <TextView
+        android:id="@+id/nameDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:text="Đèn phòng khách"
+        android:textColor="@color/colorRed"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toStartOf="@+id/line"
+        app:layout_constraintStart_toStartOf="@+id/line1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Brightness"
+        app:layout_constraintBottom_toTopOf="@+id/seekValue"
+        app:layout_constraintEnd_toStartOf="@+id/line5"
+        app:layout_constraintStart_toStartOf="@+id/line4" />
+
+    <TextView
+        android:id="@+id/txtColor"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Off"
+        app:layout_constraintEnd_toStartOf="@+id/line5"
+        app:layout_constraintStart_toStartOf="@+id/line4"
+        app:layout_constraintTop_toBottomOf="@+id/nameDevice" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.smartapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,8 +82,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             electricDevice = lstDevice.get(getAdapterPosition());
 
             Intent intent = new Intent(context, DeviceDetail.class);
+            Bundle bundle = new Bundle();
 
-            intent.putExtra("ID", electricDevice.id);
+            bundle.putString("ID", electricDevice.id);
+            bundle.putString("NAME", electricDevice.name);
+
+            intent.putExtras(bundle);
+
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

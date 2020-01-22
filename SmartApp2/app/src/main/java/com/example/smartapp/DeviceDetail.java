@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -23,13 +24,16 @@ import java.io.UnsupportedEncodingException;
 public class DeviceDetail extends AppCompatActivity {
 
     Button Red, Green, Blue, Yellow, Violet, Aqua, White, Power, More;
+    TextView tv_devicename, tv_color;
     SeekBar seekBar;
     public int clicked = 0;
     public int valueProgress = 0;
     public float valuePower = 255;
     public String mes;
-    public String ids;
-    public int counter=0;
+    //public String ids;
+    public static int color_custom=0;
+
+
 
 
     MQTTHelper mqttHelper;
@@ -50,10 +54,21 @@ public class DeviceDetail extends AppCompatActivity {
         Power = (Button) findViewById(R.id.btnPower);
         More = (Button) findViewById(R.id.btnMore);
 
+        tv_devicename = (TextView) findViewById(R.id.nameDevice);
+        tv_color = (TextView) findViewById(R.id.txtColor);
+
         seekBar = (SeekBar) findViewById(R.id.seekValue);
 
-        Intent intent = getIntent();
-        ids = intent.getStringExtra("ID");
+
+
+        Bundle bundle = getIntent().getExtras();
+        final String Id = bundle.getString("ID");
+        final String Name_device = bundle.getString("NAME");
+        tv_devicename.setText(Name_device);
+
+        mes = "255255255" + Id;
+
+
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -69,16 +84,22 @@ public class DeviceDetail extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Log.d("xbox","progress "+valueProgress);
+
+                if(color_custom==0) {
+                    Log.d("xbox", "progress " + valueProgress);
 
 
+                    valuePower = (float) 255 / 100 * valueProgress;
+                    Log.d("xbox", "value: " + valuePower);
 
-                valuePower = (float)255 / 100 * valueProgress;
-                Log.d("xbox","value: "+valuePower);
+                    mes = CreateMesseger(mes) + Id;
 
-                mes = CreateMesseger(mes);
+                    SentMessege(mes);
+                }
 
-                SentMessege(mes);
+                if(color_custom==1){
+                    Toast.makeText(DeviceDetail.this, "Can't set Brightness when customed color", Toast.LENGTH_SHORT).show();
+                }
 
 
 
@@ -86,18 +107,18 @@ public class DeviceDetail extends AppCompatActivity {
         });
 
 
-
-
-
-
         startMqtt();
+
+        if(color_custom == 1){
+            GetColorCustom(Id);
+        }
 
 
         Red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
+                color_custom = 0;
 
                 String strValue = Integer.toString((int)valuePower);
 
@@ -109,13 +130,13 @@ public class DeviceDetail extends AppCompatActivity {
                     strValue = "0" + strValue;
                 }
 
-                mes = strValue + "000000" + ids;
+                mes = strValue + "000000" + Id;
 
 
                 SentMessege(mes);
 
 
-
+                tv_color.setText("Red");
                 Log.d("qoobee","mes: "+mes);
             }
         });
@@ -125,6 +146,8 @@ public class DeviceDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                color_custom = 0;
+
                 String strValue = Integer.toString((int)valuePower);
 
                 if(strValue.length() == 1){
@@ -135,9 +158,11 @@ public class DeviceDetail extends AppCompatActivity {
                     strValue = "0" + strValue;
                 }
 
-                mes = "000" + strValue + "000" + ids;
+                mes = "000" + strValue + "000" + Id;
 
                 SentMessege(mes);
+
+                tv_color.setText("Green");
                 Log.d("qoobee","mes: "+mes);
             }
         });
@@ -147,6 +172,8 @@ public class DeviceDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                color_custom = 0;
+
                 String strValue = Integer.toString((int)valuePower);
 
                 if(strValue.length() == 1){
@@ -157,9 +184,11 @@ public class DeviceDetail extends AppCompatActivity {
                     strValue = "0" + strValue;
                 }
 
-                mes =  "000000" + strValue + ids;
+                mes =  "000000" + strValue + Id;
 
                 SentMessege(mes);
+
+                tv_color.setText("Blue");
                 Log.d("qoobee","mes: "+mes);
             }
         });
@@ -168,6 +197,8 @@ public class DeviceDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                color_custom = 0;
+
                 String strValue = Integer.toString((int)valuePower);
 
                 if(strValue.length() == 1){
@@ -178,9 +209,11 @@ public class DeviceDetail extends AppCompatActivity {
                     strValue = "0" + strValue;
                 }
 
-                mes = strValue + strValue + "000" + ids;
+                mes = strValue + strValue + "000" + Id;
 
                 SentMessege(mes);
+
+                tv_color.setText("Yellow");
                 Log.d("qoobee","mes: "+mes);
             }
         });
@@ -189,6 +222,8 @@ public class DeviceDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                color_custom = 0;
+
                 String strValue = Integer.toString((int)valuePower);
 
                 if(strValue.length() == 1){
@@ -199,9 +234,11 @@ public class DeviceDetail extends AppCompatActivity {
                     strValue = "0" + strValue;
                 }
 
-                mes = strValue + "000" + strValue + ids;
+                mes = strValue + "000" + strValue + Id;
 
                 SentMessege(mes);
+
+                tv_color.setText("Violet");
                 Log.d("qoobee","mes: "+mes);
             }
         });
@@ -210,6 +247,8 @@ public class DeviceDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                color_custom = 0;
+
                 String strValue = Integer.toString((int)valuePower);
 
                 if(strValue.length() == 1){
@@ -220,9 +259,11 @@ public class DeviceDetail extends AppCompatActivity {
                     strValue = "0" + strValue;
                 }
 
-                mes = "000" + strValue + strValue + ids;
+                mes = "000" + strValue + strValue + Id;
 
                 SentMessege(mes);
+
+                tv_color.setText("Aqua");
                 Log.d("qoobee","mes: "+mes);
             }
         });
@@ -231,6 +272,8 @@ public class DeviceDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                color_custom = 0;
+
                 String strValue = Integer.toString((int)valuePower);
 
                 if(strValue.length() == 1){
@@ -241,9 +284,11 @@ public class DeviceDetail extends AppCompatActivity {
                     strValue = "0" + strValue;
                 }
 
-                mes = strValue + strValue + strValue + ids;
+                mes = strValue + strValue + strValue + Id;
 
                 SentMessege(mes);
+
+                tv_color.setText("White");
                 Log.d("qoobee","mes: "+mes);
             }
         });
@@ -252,13 +297,79 @@ public class DeviceDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String messeger = "000000000" + ids;
+                color_custom = 0;
+
+                String messeger = "000000000" + Id;
 
 
                 SentMessege(messeger);
+
+                tv_color.setText("Off");
                 Log.d("qoobee","mes: "+messeger);
             }
         });
+
+        More.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DeviceDetail.this, ColorPicker.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("ID", Id);
+                bundle.putString("NAME", Name_device);
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
+    public void GetColorCustom(String Id){
+
+
+
+        Bundle bundle = getIntent().getExtras();
+
+
+        String R = bundle.getString("R");
+        String G = bundle.getString("G");
+        String B = bundle.getString("B");
+
+        if(R.length() == 1){
+            R = "00" + R;
+        }
+
+        if(R.length() == 2){
+            R = "0" + R;
+        }
+
+
+        if(G.length() == 1){
+            G = "00" + G;
+        }
+
+        if(G.length() == 2){
+            G = "0" + G;
+        }
+
+
+        if(B.length() == 1){
+            B = "00" + B;
+        }
+
+        if(B.length() == 2){
+            B = "0" + B;
+        }
+
+        mes = R+G+B + Id;
+
+        SentMessege(mes);
+
+        tv_color.setText("Color Custom");
+
+        Log.d("chich","mes: "+mes);
 
 
     }
@@ -331,7 +442,7 @@ public class DeviceDetail extends AppCompatActivity {
         }
 
 
-        result = R+G+B+ids;
+        result = R+G+B;
 
         Log.d("xbox","HERE");
 

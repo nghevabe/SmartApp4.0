@@ -1,5 +1,6 @@
 package com.example.smartapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class TabHomeController extends Fragment {
 
-
+    Button buttonAdd;
     RecyclerView rv;
     MQTTHelper mqttHelper;
 
@@ -40,6 +41,7 @@ public class TabHomeController extends Fragment {
 
         View view = inflater.inflate(R.layout.tab_controller, container, false);
 
+        buttonAdd = view.findViewById(R.id.btnAdd);
 
         ArrayList<ElectricDevice> lstDevice = new ArrayList<>();
 
@@ -69,6 +71,22 @@ public class TabHomeController extends Fragment {
         startMqtt();
 
 
+
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), ScanDevice.class);
+
+
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                getActivity().getApplicationContext().startActivity(intent);
+
+            }
+        });
 
 
 
