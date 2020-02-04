@@ -30,12 +30,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartapp.DeviceController.ProcessMQTT;
+import com.example.smartapp.DeviceController.SmartProcess;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+
+import static com.example.smartapp.MainActivity.processMQTT;
+
 
 public class TabAssistant extends Fragment {
 
@@ -54,6 +67,9 @@ public class TabAssistant extends Fragment {
     public int started = 0;
 
     ArrayList<Message> lstMes = new ArrayList<Message>();
+
+    //MQTTHelper mqttHelper;
+    //ProcessMQTT processMQTT = new ProcessMQTT();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,6 +97,8 @@ public class TabAssistant extends Fragment {
         mRcvAdapter = new MessageListAdapter(lstMes, getActivity().getApplicationContext());
 
         mRecyclerView.setAdapter(mRcvAdapter);
+
+        processMQTT.startMqtt(getActivity().getApplicationContext());
 
 
 // văn mai hương là ai
@@ -206,6 +224,21 @@ public class TabAssistant extends Fragment {
                                 AddEvent(stringProcess.getContend(result),dateTimeProcess.getsYear(),dateTimeProcess.getsMonth(),dateTimeProcess.getsDay(),dateTimeProcess.getsHour(),dateTimeProcess.getsMinute());
                             }
 
+                            if (stringProcess.getType(result).contains("Controller")) {
+
+                                AddMes("Đang bật thiết bị", "receive");
+
+                                //SentMessege("2550000001");
+                                SmartProcess smartProcess = new SmartProcess();
+                                String command_type = stringProcess.getTitle(result);
+                                String device_name = stringProcess.getContend(result);
+
+                                String mes = smartProcess.SendMesseger(command_type,device_name);
+                                processMQTT.SentMessege(mes, getActivity().getApplicationContext());
+
+
+
+                            }
 
                             if (stringProcess.getType(result).contains("None")) {
 
@@ -222,6 +255,10 @@ public class TabAssistant extends Fragment {
                 });
 
     }
+
+
+
+
 
     private void initializeMediaPlayer(final String link) {
         String url = link;
@@ -355,6 +392,35 @@ public class TabAssistant extends Fragment {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        //processMQTT.Disconnect();
+// add your code here which executes when user leaving the current fragment or fragment is no longer intractable.
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //processMQTT.Disconnect();
+        //processMQTT.startMqtt(getActivity().getApplicationContext());
+        Log.d("THEODOI","RESUME");
+// add your code here which executes when user leaving the current fragment or fragment is no longer intractable.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("THEODOI","STOP");
+        //processMQTT.Disconnect();
+// add your code here which executes Fragment going to be stopped.
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        processMQTT.Disconnect();
+// add your code here which executes when the final clean up for the Fragment's state is needed.
+    }
 
 }

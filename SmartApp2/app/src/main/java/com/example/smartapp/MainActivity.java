@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.smartapp.DeviceController.ProcessMQTT;
 import com.google.android.material.tabs.TabLayout;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private TabAdapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    public static ProcessMQTT processMQTT = new ProcessMQTT();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

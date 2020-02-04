@@ -12,6 +12,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.smartapp.DeviceController.ProcessMQTT;
+
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -21,9 +23,12 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.io.UnsupportedEncodingException;
 
+import static com.example.smartapp.MainActivity.processMQTT;
+
+
 public class DeviceDetail extends AppCompatActivity {
 
-    Button Red, Green, Blue, Yellow, Violet, Aqua, White, Power, More;
+    Button Red, Green, Blue, Yellow, Violet, Aqua, White, Power, More, Back;
     TextView tv_devicename, tv_color;
     SeekBar seekBar;
     public int clicked = 0;
@@ -37,6 +42,7 @@ public class DeviceDetail extends AppCompatActivity {
 
 
     MQTTHelper mqttHelper;
+    //ProcessMQTT processMQTT = new ProcessMQTT();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,8 @@ public class DeviceDetail extends AppCompatActivity {
         White = (Button) findViewById(R.id.btnWhite);
         Power = (Button) findViewById(R.id.btnPower);
         More = (Button) findViewById(R.id.btnMore);
+
+        Back = (Button) findViewById(R.id.btnBack);
 
         tv_devicename = (TextView) findViewById(R.id.nameDevice);
         tv_color = (TextView) findViewById(R.id.txtColor);
@@ -94,7 +102,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                     mes = CreateMesseger(mes) + Id;
 
-                    SentMessege(mes);
+                    processMQTT.SentMessege(mes,DeviceDetail.this);
                 }
 
                 if(color_custom==1){
@@ -106,11 +114,15 @@ public class DeviceDetail extends AppCompatActivity {
             }
         });
 
+        //processMQTT.Disconnect();
 
-        startMqtt();
+
 
         if(color_custom == 1){
             GetColorCustom(Id);
+        } else {
+            //processMQTT.Disconnect();
+            //processMQTT.startMqtt(DeviceDetail.this);
         }
 
 
@@ -133,7 +145,7 @@ public class DeviceDetail extends AppCompatActivity {
                 mes = strValue + "000000" + Id;
 
 
-                SentMessege(mes);
+                processMQTT.SentMessege(mes,DeviceDetail.this);
 
 
                 tv_color.setText("Red");
@@ -160,7 +172,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = "000" + strValue + "000" + Id;
 
-                SentMessege(mes);
+                processMQTT.SentMessege(mes,DeviceDetail.this);
 
                 tv_color.setText("Green");
                 Log.d("qoobee","mes: "+mes);
@@ -186,7 +198,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes =  "000000" + strValue + Id;
 
-                SentMessege(mes);
+                processMQTT.SentMessege(mes,DeviceDetail.this);
 
                 tv_color.setText("Blue");
                 Log.d("qoobee","mes: "+mes);
@@ -211,7 +223,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = strValue + strValue + "000" + Id;
 
-                SentMessege(mes);
+                processMQTT.SentMessege(mes,DeviceDetail.this);
 
                 tv_color.setText("Yellow");
                 Log.d("qoobee","mes: "+mes);
@@ -236,7 +248,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = strValue + "000" + strValue + Id;
 
-                SentMessege(mes);
+                processMQTT.SentMessege(mes,DeviceDetail.this);
 
                 tv_color.setText("Violet");
                 Log.d("qoobee","mes: "+mes);
@@ -261,7 +273,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = "000" + strValue + strValue + Id;
 
-                SentMessege(mes);
+                processMQTT.SentMessege(mes,DeviceDetail.this);
 
                 tv_color.setText("Aqua");
                 Log.d("qoobee","mes: "+mes);
@@ -286,7 +298,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = strValue + strValue + strValue + Id;
 
-                SentMessege(mes);
+                processMQTT.SentMessege(mes,DeviceDetail.this);
 
                 tv_color.setText("White");
                 Log.d("qoobee","mes: "+mes);
@@ -302,7 +314,7 @@ public class DeviceDetail extends AppCompatActivity {
                 String messeger = "000000000" + Id;
 
 
-                SentMessege(messeger);
+                processMQTT.SentMessege(mes,DeviceDetail.this);
 
                 tv_color.setText("Off");
                 Log.d("qoobee","mes: "+messeger);
@@ -320,6 +332,14 @@ public class DeviceDetail extends AppCompatActivity {
                 intent.putExtras(bundle);
 
                 startActivity(intent);
+                //finish();
+            }
+        });
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -365,7 +385,7 @@ public class DeviceDetail extends AppCompatActivity {
 
         mes = R+G+B + Id;
 
-        SentMessege(mes);
+        processMQTT.SentMessege(mes,DeviceDetail.this);
 
         tv_color.setText("Color Custom");
 
@@ -452,78 +472,11 @@ public class DeviceDetail extends AppCompatActivity {
 
     }
 
-    public void SentMessege(final String messeger){
-
-
-
-        try {
-            IMqttToken token = mqttHelper.mqttAndroidClient.connect();
-            token.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // We are connected
-
-                    String topic = "SMART_PROJECT/ESP_01";
-                    String payload = messeger;
-                    byte[] encodedPayload = new byte[0];
-                    try {
-                        encodedPayload = payload.getBytes("UTF-8");
-                        MqttMessage message = new MqttMessage(encodedPayload);
-                        mqttHelper.mqttAndroidClient.publish(topic, message);
-                        //mqttHelper.mqttAndroidClient.disconnect();
-                        Log.d("mabu","send");
-
-                    } catch (UnsupportedEncodingException | MqttException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    // Something went wrong e.g. connection timeout or firewall problems
-                    Toast.makeText(DeviceDetail.this, "FAIL", Toast.LENGTH_SHORT).show();
-
-                }
 
 
 
 
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
 
-    }
-
-    private void startMqtt(){
-        mqttHelper = new MQTTHelper(DeviceDetail.this);
-
-
-
-        mqttHelper.setCallback(new MqttCallbackExtended() {
-            @Override
-            public void connectComplete(boolean b, String s) {
-                Log.d("Squirting1",s.toString());
-            }
-
-            @Override
-            public void connectionLost(Throwable throwable) {
-
-            }
-
-            @Override
-            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                Log.d("Squirting1","Mes: "+mqttMessage.toString());
-                //dataReceived.setText(mqttMessage.toString());
-            }
-
-            @Override
-            public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-
-            }
-        });
-    }
 
 
     @Override
@@ -539,11 +492,13 @@ public class DeviceDetail extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        //processMQTT.Disconnect();
         Log.d("lifecycle","onPause invoked");
     }
     @Override
     protected void onStop() {
         super.onStop();
+        //processMQTT.Disconnect();
         Log.d("lifecycle","onStop invoked");
     }
     @Override
@@ -554,11 +509,7 @@ public class DeviceDetail extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        try {
-            mqttHelper.mqttAndroidClient.disconnect();
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
+        //processMQTT.Disconnect();
         Log.d("lifecycle","onDestroy invoked");
     }
 

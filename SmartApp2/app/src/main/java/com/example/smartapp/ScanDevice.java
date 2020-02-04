@@ -338,7 +338,7 @@ public class ScanDevice extends AppCompatActivity {
 
             unregisterReceiver(this);
 
-
+            Log.d("ESPSCAN","LIST: "+wifiScanList.size());
 
             for(int i=0;i<wifiScanList.size();i++){
 
