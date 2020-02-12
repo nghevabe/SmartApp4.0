@@ -52,7 +52,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         electricDevice = lstDevice.get(position);
 
         holder.tvName.setText(electricDevice.name);
-        holder.devicePhoto.setImageResource(R.drawable.led_icon);
+        if(electricDevice.type.contains("light")) {
+            holder.devicePhoto.setImageResource(R.drawable.led_icon);
+        }
+
+        if(electricDevice.type.contains("fan")){
+            holder.devicePhoto.setImageResource(R.drawable.fan_icon);
+        }
     }
 
     // total number of cells
@@ -81,18 +87,41 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             ElectricDevice electricDevice = new ElectricDevice();
             electricDevice = lstDevice.get(getAdapterPosition());
 
-            Intent intent = new Intent(context, DeviceDetail.class);
-            Bundle bundle = new Bundle();
+            if(!electricDevice.type.contains("device_")) {
 
-            bundle.putString("ID", electricDevice.id);
-            bundle.putString("NAME", electricDevice.name);
+                if(electricDevice.type.contains("light")) {
 
-            intent.putExtras(bundle);
+                    Intent intent = new Intent(context, LightController.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("ID", electricDevice.id);
+                    bundle.putString("NAME", electricDevice.name);
+
+                    intent.putExtras(bundle);
 
 
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            context.startActivity(intent);
+                    context.startActivity(intent);
+                }
+
+                if(electricDevice.type.contains("fan")) {
+                    Intent intent = new Intent(context, FanController.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("ID", electricDevice.id);
+                    bundle.putString("NAME", electricDevice.name);
+
+                    intent.putExtras(bundle);
+
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    context.startActivity(intent);
+                }
+
+
+            }
 
 
 

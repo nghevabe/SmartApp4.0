@@ -2,7 +2,6 @@ package com.example.smartapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,21 +11,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.smartapp.DeviceController.ProcessMQTT;
-
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-
-import java.io.UnsupportedEncodingException;
-
 import static com.example.smartapp.MainActivity.processMQTT;
 
-
-public class DeviceDetail extends AppCompatActivity {
+public class LightController extends AppCompatActivity {
 
     Button Red, Green, Blue, Yellow, Violet, Aqua, White, Power, More, Back;
     TextView tv_devicename, tv_color;
@@ -47,7 +34,7 @@ public class DeviceDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.device_detail);
+        setContentView(R.layout.light_controller);
 
 
         Red = (Button) findViewById(R.id.btnRed);
@@ -81,7 +68,7 @@ public class DeviceDetail extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-               // Log.d("xbox","Value: "+i);
+                // Log.d("xbox","Value: "+i);
                 valueProgress = i;
             }
 
@@ -102,11 +89,11 @@ public class DeviceDetail extends AppCompatActivity {
 
                     mes = CreateMesseger(mes) + Id;
 
-                    processMQTT.SentMessege(mes,DeviceDetail.this);
+                    processMQTT.SentMessege("ESP_01",mes,LightController.this);
                 }
 
                 if(color_custom==1){
-                    Toast.makeText(DeviceDetail.this, "Can't set Brightness when customed color", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LightController.this, "Can't set Brightness when customed color", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -122,7 +109,7 @@ public class DeviceDetail extends AppCompatActivity {
             GetColorCustom(Id);
         } else {
             //processMQTT.Disconnect();
-            //processMQTT.startMqtt(DeviceDetail.this);
+
         }
 
 
@@ -145,7 +132,7 @@ public class DeviceDetail extends AppCompatActivity {
                 mes = strValue + "000000" + Id;
 
 
-                processMQTT.SentMessege(mes,DeviceDetail.this);
+                processMQTT.SentMessege("ESP_01",mes,LightController.this);
 
 
                 tv_color.setText("Red");
@@ -172,7 +159,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = "000" + strValue + "000" + Id;
 
-                processMQTT.SentMessege(mes,DeviceDetail.this);
+                processMQTT.SentMessege("ESP_01",mes,LightController.this);
 
                 tv_color.setText("Green");
                 Log.d("qoobee","mes: "+mes);
@@ -198,7 +185,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes =  "000000" + strValue + Id;
 
-                processMQTT.SentMessege(mes,DeviceDetail.this);
+                processMQTT.SentMessege("ESP_01",mes,LightController.this);
 
                 tv_color.setText("Blue");
                 Log.d("qoobee","mes: "+mes);
@@ -223,7 +210,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = strValue + strValue + "000" + Id;
 
-                processMQTT.SentMessege(mes,DeviceDetail.this);
+                processMQTT.SentMessege("ESP_01",mes,LightController.this);
 
                 tv_color.setText("Yellow");
                 Log.d("qoobee","mes: "+mes);
@@ -248,7 +235,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = strValue + "000" + strValue + Id;
 
-                processMQTT.SentMessege(mes,DeviceDetail.this);
+                processMQTT.SentMessege("ESP_01",mes,LightController.this);
 
                 tv_color.setText("Violet");
                 Log.d("qoobee","mes: "+mes);
@@ -273,7 +260,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = "000" + strValue + strValue + Id;
 
-                processMQTT.SentMessege(mes,DeviceDetail.this);
+                processMQTT.SentMessege("ESP_01",mes,LightController.this);
 
                 tv_color.setText("Aqua");
                 Log.d("qoobee","mes: "+mes);
@@ -298,7 +285,7 @@ public class DeviceDetail extends AppCompatActivity {
 
                 mes = strValue + strValue + strValue + Id;
 
-                processMQTT.SentMessege(mes,DeviceDetail.this);
+                processMQTT.SentMessege("ESP_01",mes,LightController.this);
 
                 tv_color.setText("White");
                 Log.d("qoobee","mes: "+mes);
@@ -314,7 +301,7 @@ public class DeviceDetail extends AppCompatActivity {
                 String messeger = "000000000" + Id;
 
 
-                processMQTT.SentMessege(mes,DeviceDetail.this);
+                processMQTT.SentMessege("ESP_01",mes,LightController.this);
 
                 tv_color.setText("Off");
                 Log.d("qoobee","mes: "+messeger);
@@ -324,7 +311,7 @@ public class DeviceDetail extends AppCompatActivity {
         More.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DeviceDetail.this, ColorPicker.class);
+                Intent intent = new Intent(LightController.this, ColorPicker.class);
 
                 Bundle bundle = new Bundle();
                 bundle.putString("ID", Id);
@@ -385,7 +372,7 @@ public class DeviceDetail extends AppCompatActivity {
 
         mes = R+G+B + Id;
 
-        processMQTT.SentMessege(mes,DeviceDetail.this);
+        processMQTT.SentMessege("ESP_01",mes,LightController.this);
 
         tv_color.setText("Color Custom");
 
@@ -512,5 +499,4 @@ public class DeviceDetail extends AppCompatActivity {
         //processMQTT.Disconnect();
         Log.d("lifecycle","onDestroy invoked");
     }
-
 }

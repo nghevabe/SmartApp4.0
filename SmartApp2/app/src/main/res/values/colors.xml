@@ -12,4 +12,7 @@
     <color name="colorViolet">#FF00FF</color>
     <color name="colorAqua">#00FFFF</color>
     <color name="colorDark">#778899</color>
+    <color name="colorCalifornian">#3DDAD7</color>
+    <color name="colorChill">#AED9DA</color>
+    <color name="colorBlack">#000000</color>
 </resources>

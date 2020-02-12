@@ -234,7 +234,14 @@ public class TabAssistant extends Fragment {
                                 String device_name = stringProcess.getContend(result);
 
                                 String mes = smartProcess.SendMesseger(command_type,device_name);
-                                processMQTT.SentMessege(mes, getActivity().getApplicationContext());
+                                if(device_name.contains("quạt"))
+                                {
+                                    processMQTT.SentMessege("ESP_02",mes, getActivity().getApplicationContext());
+                                }
+
+                                if(device_name.contains("đèn")) {
+                                    processMQTT.SentMessege("ESP_01", mes, getActivity().getApplicationContext());
+                                }
 
 
 

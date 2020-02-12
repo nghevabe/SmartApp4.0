@@ -39,9 +39,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:textColor="@color/colorBlack"
                 android:text="Led1"
-                android:textColor="@color/colorRed"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
 
         </RelativeLayout>

@@ -60,7 +60,7 @@ public class ColorPicker extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ColorPicker.this, DeviceDetail.class);
+                Intent intent = new Intent(ColorPicker.this, LightController.class);
 
                 Bundle bundle = new Bundle();
 
@@ -73,7 +73,7 @@ public class ColorPicker extends AppCompatActivity {
                 intent.putExtras(bundle);
 
 
-                DeviceDetail.color_custom = 1;
+                LightController.color_custom = 1;
 
 
 

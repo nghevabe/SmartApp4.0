@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.smartapp.DeviceDetail;
 import com.example.smartapp.MQTTHelper;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -22,7 +21,7 @@ public class ProcessMQTT {
     MQTTHelper mqttHelper;
 
 
-    public void SentMessege(final String messeger, final Context context){
+    public void SentMessege(final String Node,final String messeger, final Context context){
 
 
 
@@ -33,7 +32,7 @@ public class ProcessMQTT {
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // We are connected
 
-                    String topic = "SMART_PROJECT/ESP_01";
+                    String topic = "SMART_PROJECT/"+Node;
                     String payload = messeger;
                     byte[] encodedPayload = new byte[0];
                     try {
