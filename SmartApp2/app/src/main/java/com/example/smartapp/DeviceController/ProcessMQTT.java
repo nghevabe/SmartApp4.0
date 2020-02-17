@@ -80,12 +80,13 @@ public class ProcessMQTT {
     public void startMqtt(Context context){
 
             mqttHelper = new MQTTHelper(context);
+            //mqttHelper.Listener("SMART_PROJECT/ESP_02");
 
 
             mqttHelper.setCallback(new MqttCallbackExtended() {
                 @Override
                 public void connectComplete(boolean b, String s) {
-                    Log.d("Squirting1", s.toString());
+                    Log.d("Squirting_connect", s.toString());
                 }
 
                 @Override
@@ -95,7 +96,8 @@ public class ProcessMQTT {
 
                 @Override
                 public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                    Log.d("Squirting1", "Mes: " + mqttMessage.toString());
+                    Log.d("Squirting_mes", "Mes: " + mqttMessage.toString()+ " Topic: "+topic.toString());
+                    //Log.d("Squirting_mes", "OK");
                     //dataReceived.setText(mqttMessage.toString());
                 }
 

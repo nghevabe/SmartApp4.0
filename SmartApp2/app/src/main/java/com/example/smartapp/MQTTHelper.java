@@ -19,7 +19,8 @@ public class MQTTHelper {
     final String serverUri = "tcp://tailor.cloudmqtt.com:11359";
 
     final String clientId = "linhtran01";
-    final String subscriptionTopic = "SMART_PROJECT/ESP_01";
+    final String subscriptionTopic1 = "SMART_PROJECT/ESP_01";
+    final String subscriptionTopic2 = "SMART_PROJECT/ESP_02";
 
     final String username = "dhvuddfk";
     final String password = "-2Y-VhjTn8lE";
@@ -50,6 +51,7 @@ public class MQTTHelper {
         connect();
     }
 
+
     public void setCallback(MqttCallbackExtended callback) {
         mqttAndroidClient.setCallback(callback);
     }
@@ -73,7 +75,9 @@ public class MQTTHelper {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    subscribeToTopic();
+                    subscribeToTopic(subscriptionTopic1);
+                    subscribeToTopic(subscriptionTopic2);
+
                 }
 
                 @Override
@@ -89,9 +93,9 @@ public class MQTTHelper {
     }
 
 
-    private void subscribeToTopic() {
+    private void subscribeToTopic(String topic) {
         try {
-            mqttAndroidClient.subscribe(subscriptionTopic, 0, null, new IMqttActionListener() {
+            mqttAndroidClient.subscribe(topic, 0, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.w("Mqtt","Subscribed!");

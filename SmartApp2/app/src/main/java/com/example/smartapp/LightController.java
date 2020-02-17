@@ -301,7 +301,7 @@ public class LightController extends AppCompatActivity {
                 String messeger = "000000000" + Id;
 
 
-                processMQTT.SentMessege("ESP_01",mes,LightController.this);
+                processMQTT.SentMessege("ESP_01",messeger,LightController.this);
 
                 tv_color.setText("Off");
                 Log.d("qoobee","mes: "+messeger);
