@@ -12,17 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.ArrayList;
 
 public class TabDeviceController extends Fragment {
 
     Button buttonAdd;
-    RecyclerView rv;
-    MQTTHelper mqttHelper;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,9 +72,6 @@ public class TabDeviceController extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity().getApplicationContext(), ScanDevice.class);
-
-
-
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 getActivity().getApplicationContext().startActivity(intent);
@@ -97,36 +90,5 @@ public class TabDeviceController extends Fragment {
 
     //tcp://broker.mqttdashboard.com:1883
 
-
-
-
-    private void startMqtt(){
-        mqttHelper = new MQTTHelper(getActivity().getApplicationContext());
-
-
-
-        mqttHelper.setCallback(new MqttCallbackExtended() {
-            @Override
-            public void connectComplete(boolean b, String s) {
-                Log.d("Squirting1",s.toString());
-            }
-
-            @Override
-            public void connectionLost(Throwable throwable) {
-
-            }
-
-            @Override
-            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                Log.d("Squirting1","Mes: "+mqttMessage.toString());
-                //dataReceived.setText(mqttMessage.toString());
-            }
-
-            @Override
-            public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-
-            }
-        });
-    }
 
 }

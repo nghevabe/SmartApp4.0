@@ -53,7 +53,7 @@
         app:layout_constraintGuide_percent="0.5060827" />
 
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnScenario"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -61,7 +61,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
         android:background="@color/colorPrimary"
-        android:text="Create Scenario"
+        android:text="Scenario"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"

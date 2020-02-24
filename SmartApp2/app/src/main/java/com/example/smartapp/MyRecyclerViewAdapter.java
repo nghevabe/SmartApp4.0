@@ -59,6 +59,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         if(electricDevice.type.contains("fan")){
             holder.devicePhoto.setImageResource(R.drawable.fan_icon);
         }
+
+        if(electricDevice.type.contains("glass")){
+            holder.devicePhoto.setImageResource(R.drawable.glass);
+        }
+
+        if(electricDevice.type.contains("door")){
+            holder.devicePhoto.setImageResource(R.drawable.door);
+        }
     }
 
     // total number of cells
@@ -120,7 +128,34 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     context.startActivity(intent);
                 }
 
+                if(electricDevice.type.contains("glass")) {
+                    Intent intent = new Intent(context, GlassController.class);
+                    Bundle bundle = new Bundle();
 
+                    bundle.putString("ID", electricDevice.id);
+                    bundle.putString("NAME", electricDevice.name);
+
+                    intent.putExtras(bundle);
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    context.startActivity(intent);
+                }
+
+                if(electricDevice.type.contains("door")) {
+                    Intent intent = new Intent(context, DoorController.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("ID", electricDevice.id);
+                    bundle.putString("NAME", electricDevice.name);
+
+                    intent.putExtras(bundle);
+
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    context.startActivity(intent);
+                }
             }
 
 

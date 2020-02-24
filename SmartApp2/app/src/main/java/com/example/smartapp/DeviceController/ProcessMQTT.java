@@ -1,10 +1,16 @@
 package com.example.smartapp.DeviceController;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+
 import com.example.smartapp.MQTTHelper;
+import com.example.smartapp.R;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -19,6 +25,8 @@ public class ProcessMQTT {
 
 
     MQTTHelper mqttHelper;
+
+    public static int rev = 0;
 
 
     public void SentMessege(final String Node,final String messeger, final Context context){
@@ -77,11 +85,28 @@ public class ProcessMQTT {
 
     }
 
-    public void startMqtt(Context context){
+    private void addNotification(Context context, String mes) {
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.drawable.iconapp)
+                        .setContentTitle("MQTT Messeger")
+                        .setContentText(mes);
+
+        Intent notificationIntent = new Intent(context, ProcessMQTT.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+
+        // Add as notification
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
+    }
+
+    public void startMqtt(final Context context){
 
             mqttHelper = new MQTTHelper(context);
             //mqttHelper.Listener("SMART_PROJECT/ESP_02");
-
+//
 
             mqttHelper.setCallback(new MqttCallbackExtended() {
                 @Override
@@ -99,6 +124,8 @@ public class ProcessMQTT {
                     Log.d("Squirting_mes", "Mes: " + mqttMessage.toString()+ " Topic: "+topic.toString());
                     //Log.d("Squirting_mes", "OK");
                     //dataReceived.setText(mqttMessage.toString());
+                    addNotification(context,mqttMessage.toString());
+                    rev = 1;
                 }
 
                 @Override

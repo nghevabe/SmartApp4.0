@@ -20,10 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize">
-        <activity android:name=".LightController"></activity>
+        <activity android:name=".DoorController"></activity>
+        <activity android:name=".GlassController" />
+        <activity android:name=".LightController" />
         <activity android:name=".FanController" />
         <activity android:name=".ScanDevice" />
         <activity android:name=".ColorPicker" />
+        <activity android:name=".HouseScenario" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

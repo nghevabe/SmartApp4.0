@@ -10,28 +10,30 @@ import android.widget.SeekBar;
 
 import static com.example.smartapp.MainActivity.processMQTT;
 
-public class FanController extends AppCompatActivity {
+public class GlassController extends AppCompatActivity {
 
     Button btnOn, btnOff, btnBack;
     SeekBar powerBar;
 
     public int valueProgress = 0;
-    public float valuePower = 700;
+    public float valuePower = 999;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fan_controller);
+        setContentView(R.layout.glass_controller);
 
         btnOn = (Button) findViewById(R.id.buttonOn);
         btnOff = (Button) findViewById(R.id.buttonOff);
         btnBack = (Button) findViewById(R.id.buttonBack);
         powerBar = (SeekBar) findViewById(R.id.seekBar);
 
+
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                processMQTT.SentMessege("ESP_02","ON0",FanController.this);
+                processMQTT.SentMessege("ESP_03","ON0",GlassController.this);
             }
         });
 
@@ -39,10 +41,9 @@ public class FanController extends AppCompatActivity {
         btnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                processMQTT.SentMessege("ESP_02","OFF0",FanController.this);
+                processMQTT.SentMessege("ESP_03","OFF0",GlassController.this);
             }
         });
-
 
         powerBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -60,18 +61,11 @@ public class FanController extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
-                if(valueProgress == 0){
-                    valuePower = 0;
-                }
-
-                if(valueProgress != 0){
-                    valuePower = (float) 250 + (700 / 100 * valueProgress);
-                }
-
+                valuePower = (float) 999 / 100 * valueProgress;
                 Log.d("xbox", "value: " + valuePower);
 
                 String mes = (int)valuePower + "0";
-                processMQTT.SentMessege("ESP_02",mes,FanController.this);
+                processMQTT.SentMessege("ESP_03",mes,GlassController.this);
 
             }
         });
@@ -82,5 +76,6 @@ public class FanController extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 }

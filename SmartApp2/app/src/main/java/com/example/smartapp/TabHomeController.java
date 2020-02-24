@@ -30,7 +30,7 @@ import java.util.List;
 
 public class TabHomeController extends Fragment {
 
-    Button buttonAdd;
+    Button buttonScenario;
     RecyclerView rv;
     MQTTHelper mqttHelper;
 
@@ -41,7 +41,7 @@ public class TabHomeController extends Fragment {
 
         View view = inflater.inflate(R.layout.tab_house_controller, container, false);
 
-        buttonAdd = view.findViewById(R.id.btnAdd);
+        buttonScenario = view.findViewById(R.id.btnScenario);
 
         ArrayList<ElectricDevice> lstDevice = new ArrayList<>();
 
@@ -50,17 +50,21 @@ public class TabHomeController extends Fragment {
         ElectricDevice device2 = new ElectricDevice("2","Đèn phòng ngủ","light","none");
         ElectricDevice device3 = new ElectricDevice("3","Đèn bếp","light","none");
         ElectricDevice device4 = new ElectricDevice("4","Quạt phòng khách","fan","none");
+        ElectricDevice device5 = new ElectricDevice("5","Kính thông minh","glass","none");
+        ElectricDevice device6 = new ElectricDevice("6","Cửa","door","none");
         //ElectricDevice device4 = new ElectricDevice("4","Đèn sân","light","none");
 
         lstDevice.add(device1);
         lstDevice.add(device2);
         lstDevice.add(device3);
         lstDevice.add(device4);
+        lstDevice.add(device5);
+        lstDevice.add(device6);
+
 
         RecyclerView recyclerView = view.findViewById(R.id.rv);
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), numberOfColumns));
-
 
 
         adapter = new MyRecyclerViewAdapter(getActivity().getApplicationContext(), lstDevice);
@@ -68,17 +72,11 @@ public class TabHomeController extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-
-        //startMqtt();
-
-
-
-
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
+        buttonScenario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getActivity().getApplicationContext(), ScanDevice.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), HouseScenario.class);
 
 
 
