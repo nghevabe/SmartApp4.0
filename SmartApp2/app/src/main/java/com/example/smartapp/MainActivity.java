@@ -63,12 +63,19 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+
+
+
         adapter = new TabAdapter(getSupportFragmentManager());
         adapter.addFragment(new TabAssistant(), "Assistant");
         adapter.addFragment(new TabHomeController(), "My Home");
         adapter.addFragment(new TabDeviceController(), "Device");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.getTabAt(0).setIcon( R.drawable.bot_icon);
+        tabLayout.getTabAt(1).setIcon( R.drawable.house_icon);
+        tabLayout.getTabAt(2).setIcon( R.drawable.device_icon);
 
 
     }

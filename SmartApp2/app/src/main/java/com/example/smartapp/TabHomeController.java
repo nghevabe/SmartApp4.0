@@ -41,7 +41,7 @@ public class TabHomeController extends Fragment {
 
         View view = inflater.inflate(R.layout.tab_house_controller, container, false);
 
-        buttonScenario = view.findViewById(R.id.btnScenario);
+        //buttonScenario = view.findViewById(R.id.btnScenario);
 
         ArrayList<ElectricDevice> lstDevice = new ArrayList<>();
 
@@ -72,6 +72,7 @@ public class TabHomeController extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
+        /*
         buttonScenario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +87,7 @@ public class TabHomeController extends Fragment {
 
             }
         });
-
+*/
 
 
         //startMqtt();
