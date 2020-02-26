@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.smartapp.MainActivity.processMQTT;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
@@ -46,10 +50,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     // binds the data to the TextView in each cell
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         ElectricDevice electricDevice = new ElectricDevice();
         electricDevice = lstDevice.get(position);
+
+        final String device_id = electricDevice.id;
+        final String type_device = electricDevice.type;
 
         holder.tvName.setText(electricDevice.name);
         if(electricDevice.type.contains("light")) {
@@ -67,6 +74,27 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         if(electricDevice.type.contains("door")){
             holder.devicePhoto.setImageResource(R.drawable.door);
         }
+
+        holder.turn_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if(type_device.equals("light")) {
+
+                    if (b == true) {
+                        Log.d("SEX", "ID: " + position + " Turn On");
+                        processMQTT.SentMessege("ESP_01", "255255255" + device_id, context);
+                    }
+
+                    if (b == false) {
+                        Log.d("SEX", "ID: " + position + " Turn Off");
+                        processMQTT.SentMessege("ESP_01", "000000000" + device_id, context);
+                    }
+                    //Log.d("SEX","ID: "+position);
+                }
+
+            }
+        });
     }
 
     // total number of cells
@@ -80,11 +108,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvName;
         ImageView devicePhoto;
+        Switch turn_switch;
 
-        ViewHolder(View itemView) {
+        ViewHolder(final View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.device_name);
             devicePhoto = itemView.findViewById(R.id.device_photo);
+            turn_switch = itemView.findViewById(R.id.switch_turn);
+
+
+
             itemView.setOnClickListener(this);
         }
 

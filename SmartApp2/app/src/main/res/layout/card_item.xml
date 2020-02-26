@@ -23,6 +23,19 @@
             android:layout_height="match_parent"
             android:background="@color/colorCard">
 
+
+            <Switch
+                android:id="@+id/switch_turn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="80dp"
+                android:layout_toEndOf="@+id/device_photo"
+                android:trackTint="@color/colorGrey"
+                android:text="" />
+
+
             <ImageView
                 android:id="@+id/device_photo"
                 android:layout_width="76dp"
