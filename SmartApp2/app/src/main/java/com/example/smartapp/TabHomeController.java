@@ -30,7 +30,7 @@ import java.util.List;
 
 public class TabHomeController extends Fragment {
 
-    Button buttonScenario;
+    Button btnScenario, btnSetup;
     RecyclerView rv;
     MQTTHelper mqttHelper;
 
@@ -41,7 +41,8 @@ public class TabHomeController extends Fragment {
 
         View view = inflater.inflate(R.layout.tab_house_controller, container, false);
 
-        //buttonScenario = view.findViewById(R.id.btnScenario);
+       // btnScenario = view.findViewById(R.id.);
+        btnSetup = view.findViewById(R.id.buttonSetup);
 
         ArrayList<ElectricDevice> lstDevice = new ArrayList<>();
 
@@ -71,6 +72,18 @@ public class TabHomeController extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
+        btnSetup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), HouseSetup.class);
+
+
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                getActivity().getApplicationContext().startActivity(intent);
+            }
+        });
 
         /*
         buttonScenario.setOnClickListener(new View.OnClickListener() {

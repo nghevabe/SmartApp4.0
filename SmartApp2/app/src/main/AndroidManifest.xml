@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize">
-        <activity android:name=".DoorController"></activity>
+        <activity android:name=".HouseSetup"></activity>
+        <activity android:name=".DoorController" />
         <activity android:name=".GlassController" />
         <activity android:name=".LightController" />
         <activity android:name=".FanController" />
