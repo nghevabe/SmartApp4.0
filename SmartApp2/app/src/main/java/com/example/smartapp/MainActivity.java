@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(2).setIcon( R.drawable.device_icon);
 
 
+
+
     }
 
     public void TestSending(final String mes){

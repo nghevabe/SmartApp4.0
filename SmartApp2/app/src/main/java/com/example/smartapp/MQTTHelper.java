@@ -19,8 +19,9 @@ public class MQTTHelper {
     final String serverUri = "tcp://tailor.cloudmqtt.com:11359";
 
     final String clientId = "linhtran01";
-    final String subscriptionTopic1 = "SMART_PROJECT/ESP_01";
-    final String subscriptionTopic2 = "SMART_PROJECT/ESP_02";
+    final String subscriptionTopic1 = "SMART_PROJECT/ESP_07";
+    //final String subscriptionTopic2 = "SMART_PROJECT/ESP_02";
+    //final String subscriptionTopic3 = "SMART_PROJECT/ESP_03";
 
     final String username = "dhvuddfk";
     final String password = "-2Y-VhjTn8lE";
@@ -75,8 +76,15 @@ public class MQTTHelper {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
+                    /*
+                    try {
+                        mqttAndroidClient.unsubscribe("SMART_PROJECT/ESP_01");
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
+                    */
                     subscribeToTopic(subscriptionTopic1);
-                    subscribeToTopic(subscriptionTopic2);
+                    //subscribeToTopic(subscriptionTopic2);
 
                 }
 

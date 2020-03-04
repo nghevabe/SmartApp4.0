@@ -14,7 +14,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CalendarContract;
+import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +27,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,6 +55,9 @@ import static com.example.smartapp.MainActivity.processMQTT;
 
 
 public class TabAssistant extends Fragment {
+
+    private SpeechRecognizer mSpeechRecognizer;
+    private Intent mSpeechRecognizerIntent;
 
     Button btn, voicebtn;
     TextView tv;
@@ -128,6 +135,7 @@ public class TabAssistant extends Fragment {
             }
         });
 
+        SetupVoice();
 
         voicebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,9 +149,83 @@ public class TabAssistant extends Fragment {
                     mPlayer.stop();
                 }
 
-                GetVoice();
+                mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                //GetVoice();
 
             }
+        });
+
+        mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
+
+            @Override
+            public void onBeginningOfSpeech() {
+                // TODO Auto-generated method stub
+                Log.d("anal","Begin");
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+                // TODO Auto-generated method stub
+                Log.d("anal","End");
+
+            }
+
+            @Override
+            public void onError(int arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onEvent(int arg0, Bundle arg1) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onPartialResults(Bundle partialResults) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onReadyForSpeech(Bundle params) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onResults(Bundle results) {
+                // TODO Auto-generated method stub
+
+                ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+                Log.d("anal","Ket qua: "+matches.get(0).toString());
+
+
+                String out = matches.get(0);
+
+                out = out.toLowerCase();
+
+                AddMes(out,"send");
+
+                Log.d("anal","result|"+out+"|");
+
+            }
+
+            @Override
+            public void onRmsChanged(float rmsdB) {
+                // TODO Auto-generated method stub
+
+            }
+
         });
 
 
@@ -226,7 +308,7 @@ public class TabAssistant extends Fragment {
 
                             if (stringProcess.getType(result).contains("Controller")) {
 
-                                AddMes("Đang bật thiết bị", "receive");
+                                AddMes("Đang thực hiện", "receive");
 
                                 //SentMessege("2550000001");
                                 SmartProcess smartProcess = new SmartProcess();
@@ -397,6 +479,22 @@ public class TabAssistant extends Fragment {
                 break;
             }
         }
+    }
+
+    public void SetupVoice(){
+
+        if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+        }
+
+        mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity().getApplicationContext());
+        mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
+                getActivity().getApplicationContext().getPackageName());
+
     }
 
     @Override

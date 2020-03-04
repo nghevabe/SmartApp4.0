@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smartapp">
 
+    <uses-permission android:name = "android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -20,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize">
-        <activity android:name=".HouseSetup"></activity>
+        <activity android:name=".HouseNotify"></activity>
+        <activity android:name=".HouseSetup" />
         <activity android:name=".DoorController" />
         <activity android:name=".GlassController" />
         <activity android:name=".LightController" />

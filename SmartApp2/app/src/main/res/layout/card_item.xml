@@ -32,7 +32,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="80dp"
                 android:layout_toEndOf="@+id/device_photo"
-                android:trackTint="@color/colorGrey"
+                android:trackTint="@color/colorDark"
                 android:text="" />
 
 
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:textColor="@color/colorGrey"
+                android:textColor="@color/colorDark"
                 android:text="Led1"
                 android:textSize="15sp" />
 

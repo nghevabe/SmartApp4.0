@@ -5,12 +5,19 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.smartapp.HouseNotify;
 import com.example.smartapp.MQTTHelper;
+import com.example.smartapp.Notificationer;
+import com.example.smartapp.NotifyAdapter;
 import com.example.smartapp.R;
+import com.example.smartapp.SetupData;
+import com.example.smartapp.TabHomeController;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -20,13 +27,18 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class ProcessMQTT {
 
 
     MQTTHelper mqttHelper;
 
+    Notificationer notificationer;
+
     public static int rev = 0;
+
+    int id_count = 0;
 
 
     public void SentMessege(final String Node,final String messeger, final Context context){
@@ -112,6 +124,7 @@ public class ProcessMQTT {
                 @Override
                 public void connectComplete(boolean b, String s) {
                     Log.d("Squirting_connect", s.toString());
+
                 }
 
                 @Override
@@ -124,7 +137,33 @@ public class ProcessMQTT {
                     Log.d("Squirting_mes", "Mes: " + mqttMessage.toString()+ " Topic: "+topic.toString());
                     //Log.d("Squirting_mes", "OK");
                     //dataReceived.setText(mqttMessage.toString());
-                    addNotification(context,mqttMessage.toString());
+
+                   // NotifyAdapter notifyAdapter;
+
+
+
+
+                    notificationer = new Notificationer(""+id_count,"Air","chất lượng không khí: "+mqttMessage.toString());
+                    id_count++;
+
+                    SetupData.lstNof.add(notificationer);
+
+                    if(SetupData.notify_list_started == 1) {
+                        SetupData.notifyAdapter = new NotifyAdapter(context, SetupData.lstNof);
+                        HouseNotify.recyclerView.setAdapter(SetupData.notifyAdapter);
+                    }
+
+                    if(SetupData.lstNof.size() == 0){
+                        TabHomeController.imgDot.setVisibility(View.INVISIBLE);
+                    }
+
+                    if(SetupData.lstNof.size() > 0){
+                        TabHomeController.imgDot.setVisibility(View.VISIBLE);
+                    }
+
+                    //TabHomeController.imgDot.setVisibility(View.VISIBLE);
+
+                    addNotification(context,topic+" : "+mqttMessage.toString());
                     rev = 1;
                 }
 

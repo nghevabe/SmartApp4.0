@@ -33,7 +33,7 @@
         app:tabIndicatorHeight="3dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/colorPrimaryDark"
-        app:tabTextColor="@color/colorGrey"></com.google.android.material.tabs.TabLayout>
+        app:tabTextColor="@color/colorDark"></com.google.android.material.tabs.TabLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline16"

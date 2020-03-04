@@ -57,7 +57,7 @@ public class ScanDevice extends AppCompatActivity {
         setContentView(R.layout.scan_device);
 
         buttonScan = (Button) findViewById(R.id.btnConnect);
-        buttonSend = (Button) findViewById(R.id.btnSend);
+
         listView = (ListView) findViewById(R.id.listDevice);
 
 
@@ -85,56 +85,7 @@ public class ScanDevice extends AppCompatActivity {
 
         });
 
-        buttonSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Sendata();
 
-                LayoutInflater li = LayoutInflater.from(ScanDevice.this);
-                View DialogView = li.inflate(R.layout.send_dialog, null);
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        ScanDevice.this);
-
-                // set prompts.xml to alertdialog builder
-                alertDialogBuilder.setView(DialogView);
-
-                final EditText nameWifiInput = (EditText) DialogView
-                        .findViewById(R.id.edId);
-
-                final EditText passWifiInput = (EditText) DialogView
-                        .findViewById(R.id.edPass);
-
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setTitle("Share Wifi with Device to Connect")
-                        .setPositiveButton("Connect",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // get user input and set it to result
-                                        // edit text
-                                        //result.setText(userInput.getText());
-                                        String nameWifi = nameWifiInput.getText().toString();
-                                        String passWifi = passWifiInput.getText().toString();
-
-                                        ShareWifi(nameWifi,passWifi);
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
-
-            }
-        });
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

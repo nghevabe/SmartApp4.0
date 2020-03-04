@@ -64,15 +64,15 @@ public class SmartProcess {
         }
 
 
-        if(device_name.contains("đèn phòng khách")){
-            device = "1";
-        }
-
-        if(device_name.contains("đèn bàn học")){
+        if(device_name.contains("đèn phòng ngủ")){
             device = "2";
         }
 
-        if(device_name.contains("đèn bếp")){
+        if(device_name.contains("đèn nhà tắm")){
+            device = "1";
+        }
+
+        if(device_name.contains("đèn phòng khách")){
             device = "3";
         }
 
