@@ -23,7 +23,7 @@ public class HouseSetup extends AppCompatActivity {
         btnSmart = findViewById(R.id.buttonSmart);
         btnBack = findViewById(R.id.buttonBack);
 
-       btnBack.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                finish();

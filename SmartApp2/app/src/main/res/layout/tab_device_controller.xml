@@ -15,6 +15,7 @@
         android:layout_marginTop="75dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="25dp"
+        app:cardCornerRadius="6dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

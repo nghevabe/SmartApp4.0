@@ -143,7 +143,7 @@ public class ProcessMQTT {
 
 
 
-                    notificationer = new Notificationer(""+id_count,"Air","chất lượng không khí: "+mqttMessage.toString());
+                    notificationer = new Notificationer(""+id_count,"Air","Có người hút thuốc");
                     id_count++;
 
                     SetupData.lstNof.add(notificationer);
@@ -163,7 +163,8 @@ public class ProcessMQTT {
 
                     //TabHomeController.imgDot.setVisibility(View.VISIBLE);
 
-                    addNotification(context,topic+" : "+mqttMessage.toString());
+                    //addNotification(context,topic+" : "+mqttMessage.toString());
+                    addNotification(context,"Cảnh báo không khí");
                     rev = 1;
                 }
 

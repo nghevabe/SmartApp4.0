@@ -28,6 +28,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class ScanDevice extends AppCompatActivity {
     Button buttonScan, buttonSend;
     ListView listView;
     WifiManager mainWifiObj;
+    ImageView btnBack;
 
     ArrayList<String> lstDevice = new ArrayList<>();
 
@@ -60,14 +62,20 @@ public class ScanDevice extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listDevice);
 
+        btnBack = findViewById(R.id.buttonBack);
 
-
+        //
         mainWifiObj = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
 
         Check();
 
-
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         buttonScan.setOnClickListener(new View.OnClickListener() {
