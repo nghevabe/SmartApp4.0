@@ -67,7 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/switch_welcome"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -186,7 +186,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
             <Switch
-                android:id="@+id/switch2"
+                android:id="@+id/switch_relax"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -256,7 +256,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
             <Switch
-                android:id="@+id/switch3"
+                android:id="@+id/switch_sleep"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"

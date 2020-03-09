@@ -67,7 +67,6 @@ public class ScanDevice extends AppCompatActivity {
         //
         mainWifiObj = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
-
         Check();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
