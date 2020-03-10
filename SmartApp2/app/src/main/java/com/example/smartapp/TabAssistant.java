@@ -2,6 +2,7 @@ package com.example.smartapp;
 
 import android.Manifest;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -67,6 +68,8 @@ public class TabAssistant extends Fragment {
     RecyclerView mRecyclerView;
     MessageListAdapter mRcvAdapter;
 
+    BroadcastReceiver receiver = null;
+
     protected static final int RESULT_SPEECH = 5;
     public TextToSpeech t1;
     public MediaPlayer mPlayer = new MediaPlayer();
@@ -108,6 +111,9 @@ public class TabAssistant extends Fragment {
         processMQTT.startMqtt(getActivity().getApplicationContext());
 
 
+
+
+
 // văn mai hương là ai
 
         t1 = new TextToSpeech(getActivity().getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -118,6 +124,12 @@ public class TabAssistant extends Fragment {
                 }
             }
         });
+
+        try {
+            Vidu();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         //KhoiTao();
 
@@ -237,6 +249,20 @@ public class TabAssistant extends Fragment {
 
 
 
+    public void Vidu() throws UnsupportedEncodingException {
+
+        String s = "bật đèn";
+        byte arr[] = s.getBytes("UTF8");
+        String y = "";
+        for (byte x: arr) {
+
+            y = y + " " +  x;
+
+        }
+
+       // Log.d("ramlan","y: "+y);
+
+    }
 
     public void GetVoice() {
         Intent intent = new Intent(

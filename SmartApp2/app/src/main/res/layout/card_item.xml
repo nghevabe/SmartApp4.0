@@ -45,7 +45,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/device_photo" />
 
-
             <ImageView
                 android:id="@+id/device_photo"
                 android:layout_width="76dp"

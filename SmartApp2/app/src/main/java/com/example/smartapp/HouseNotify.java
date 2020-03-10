@@ -17,7 +17,7 @@ public class HouseNotify extends AppCompatActivity {
 
     public static RecyclerView recyclerView;
     public static TextView realtxt;
-
+    ImageView btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,8 @@ public class HouseNotify extends AppCompatActivity {
 
         realtxt = findViewById(R.id.realtimeText);
 
+        btnBack = findViewById(R.id.buttonBack);
+
         recyclerView.setHasFixedSize(true);
 
         ArrayList<Notificationer> lstNof = new ArrayList<>();
@@ -44,7 +46,12 @@ public class HouseNotify extends AppCompatActivity {
 
         recyclerView.setAdapter(SetupData.notifyAdapter);
 
-
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

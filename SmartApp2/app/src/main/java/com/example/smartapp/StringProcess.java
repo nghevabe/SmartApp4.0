@@ -1,5 +1,7 @@
 package com.example.smartapp;
 
+import android.util.Log;
+
 public class StringProcess {
 
 
@@ -25,6 +27,44 @@ public class StringProcess {
         return newString;
     }
 
+    /*
+    public String DecoderSms(String input){
+
+        String[] lstWord = {"bật","đèn","phòng","khách"};
+
+        String[] input_cut = input.split(" ");
+        String newString = "";
+
+
+        for(int i=0;i<input_cut.length;i++){
+
+            for(int j=0; j<lstWord.length;j++){
+
+                if(input_cut[i].contains(lstWord[j])) {
+                    input_cut[i] = lstWord[j];
+                    Log.d("wordxxx","x: "+input_cut[i]);
+                    if (i == 0) {
+
+                        newString = input_cut[0];
+
+                    }
+
+                    if (i > 0) {
+                        newString = newString + "%20" + input_cut[i];
+                    }
+                }
+
+            }
+
+
+
+        }
+
+
+
+        return newString;
+    }
+*/
     public String getContendInfo(String input){
 
         int index_start = input.indexOf("Contend");

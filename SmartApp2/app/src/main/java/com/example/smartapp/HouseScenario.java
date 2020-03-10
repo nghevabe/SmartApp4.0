@@ -61,7 +61,7 @@ public class HouseScenario extends AppCompatActivity {
                             processMQTT.SentMessege("ESP_04","ON0", HouseScenario.this);
 
                         }
-                    }, 500);
+                    }, 1000);
 
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -71,7 +71,7 @@ public class HouseScenario extends AppCompatActivity {
                             processMQTT.SentMessege("ESP_03","ON0", HouseScenario.this);
 
                         }
-                    }, 1000);
+                    }, 2000);
 
                 }
 
@@ -104,7 +104,7 @@ public class HouseScenario extends AppCompatActivity {
                             processMQTT.SentMessege("ESP_01","0001001003", HouseScenario.this);
 
                         }
-                    }, 500);
+                    }, 1000);
                     //https://aredir.nixcdn.com/NhacCuaTui921/NhacThienTinhTamHoaSenNuocChay-VA-4428738.mp3?st=wQ1kAaGJOCZehaYStO9Tmw&e=1583828309
 
                     new Handler().postDelayed(new Runnable() {
@@ -115,7 +115,7 @@ public class HouseScenario extends AppCompatActivity {
                             processMQTT.SentMessege("ESP_04","OFF0", HouseScenario.this);
 
                         }
-                    }, 1000);
+                    }, 2000);
 
 
                     new Handler().postDelayed(new Runnable() {
@@ -126,7 +126,7 @@ public class HouseScenario extends AppCompatActivity {
                             processMQTT.SentMessege("ESP_03","OFF0", HouseScenario.this);
 
                         }
-                    }, 1500);
+                    }, 3000);
                 }
 
 
@@ -171,7 +171,7 @@ public class HouseScenario extends AppCompatActivity {
                             processMQTT.SentMessege("ESP_03","OFF0", HouseScenario.this);
 
                         }
-                    }, 1500);
+                    }, 2000);
 
                 }
 
