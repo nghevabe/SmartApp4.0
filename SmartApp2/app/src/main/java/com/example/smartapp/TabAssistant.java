@@ -125,13 +125,7 @@ public class TabAssistant extends Fragment {
             }
         });
 
-        try {
-            Vidu();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
 
-        //KhoiTao();
 
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -249,20 +243,7 @@ public class TabAssistant extends Fragment {
 
 
 
-    public void Vidu() throws UnsupportedEncodingException {
 
-        String s = "bật đèn";
-        byte arr[] = s.getBytes("UTF8");
-        String y = "";
-        for (byte x: arr) {
-
-            y = y + " " +  x;
-
-        }
-
-       // Log.d("ramlan","y: "+y);
-
-    }
 
     public void GetVoice() {
         Intent intent = new Intent(

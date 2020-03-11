@@ -21,7 +21,8 @@ public class ColorPicker extends AppCompatActivity {
 
     Button btn;
     ImageView mImageView;
-    TextView tvResult;
+    ImageView btnBack;
+    //TextView tvResult;
     View colorview;
 
     public int r;
@@ -36,9 +37,10 @@ public class ColorPicker extends AppCompatActivity {
         setContentView(R.layout.color_picker);
 
         mImageView = (ImageView) findViewById(R.id.imageView);
-        tvResult = (TextView) findViewById(R.id.txtResult);
+        //tvResult = (TextView) findViewById(R.id.txtResult);
         colorview = (View) findViewById(R.id.colorView);
         btn = (Button) findViewById(R.id.btnChoose);
+        btnBack = findViewById(R.id.buttonBack);
 
         mImageView.setDrawingCacheEnabled(true);
         mImageView.buildDrawingCache(true);
@@ -55,6 +57,13 @@ public class ColorPicker extends AppCompatActivity {
         b=0;
 
         //processMQTT.startMqtt(ColorPicker.this);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +107,7 @@ public class ColorPicker extends AppCompatActivity {
                      g = Color.green(pixel);
                      b = Color.blue(pixel);
 
-                    tvResult.setText("Red: "+r + "   Green: "+g + "   Blue: "+b);
+                    //tvResult.setText("Red: "+r + "   Green: "+g + "   Blue: "+b);
 
                     colorview.setBackgroundColor(Color.rgb(r,g,b));
 

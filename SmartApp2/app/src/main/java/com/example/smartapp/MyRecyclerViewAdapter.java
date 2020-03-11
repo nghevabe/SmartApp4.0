@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.smartapp.MainActivity.processMQTT;
+import static com.example.smartapp.LightController.electricDeviceId;
+import static com.example.smartapp.LightController.electricDeviceName;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
@@ -137,11 +139,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                     bundle.putString("ID", electricDevice.id);
                     bundle.putString("NAME", electricDevice.name);
-
                     intent.putExtras(bundle);
-
-
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    electricDeviceId = electricDevice.id;
+                    electricDeviceName = electricDevice.name;
 
                     context.startActivity(intent);
                 }
@@ -152,11 +154,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                     bundle.putString("ID", electricDevice.id);
                     bundle.putString("NAME", electricDevice.name);
-
                     intent.putExtras(bundle);
-
-
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    electricDeviceId = electricDevice.id;
+                    electricDeviceName = electricDevice.name;
 
                     context.startActivity(intent);
                 }
@@ -167,10 +169,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                     bundle.putString("ID", electricDevice.id);
                     bundle.putString("NAME", electricDevice.name);
-
                     intent.putExtras(bundle);
-
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    electricDeviceId = electricDevice.id;
+                    electricDeviceName = electricDevice.name;
 
                     context.startActivity(intent);
                 }
@@ -181,11 +184,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                     bundle.putString("ID", electricDevice.id);
                     bundle.putString("NAME", electricDevice.name);
-
                     intent.putExtras(bundle);
-
-
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    electricDeviceId = electricDevice.id;
+                    electricDeviceName = electricDevice.name;
 
                     context.startActivity(intent);
                 }

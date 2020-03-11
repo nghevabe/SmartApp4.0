@@ -1,6 +1,8 @@
 package com.example.smartapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,19 +13,23 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import static com.example.smartapp.MainActivity.processMQTT;
 
 public class LightController extends AppCompatActivity {
 
-    Button Red, Green, Blue, Yellow, Violet, Aqua, White, Power, More, Back;
+    //Button Red, Green, Blue, Yellow, Violet, Aqua, White, Power, More, Back;
     TextView tv_devicename, tv_color;
     SeekBar seekBar;
     public int clicked = 0;
     public int valueProgress = 0;
-    public float valuePower = 255;
-    public String mes;
+    public static float valuePower = 255;
+    public static String mes;
     //public String ids;
     public static int color_custom=0;
+    public static String electricDeviceId;
+    public static String electricDeviceName;
 
 
 
@@ -31,12 +37,35 @@ public class LightController extends AppCompatActivity {
     MQTTHelper mqttHelper;
     //ProcessMQTT processMQTT = new ProcessMQTT();
 
+    private RecyclerView recyclerView;
+    private ArrayList<ColorModel> imageModelArrayList;
+    private ColorAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.light_controller);
 
 
+
+        ArrayList<ColorModel> lstColor = new ArrayList<>();
+
+        ColorModel colorModel1 = new ColorModel("255000000" + electricDeviceId,"Red");
+        ColorModel colorModel2 = new ColorModel("000255000" + electricDeviceId,"Green");
+        ColorModel colorModel3 = new ColorModel("000000255" + electricDeviceId,"Blue");
+        ColorModel colorModel4 = new ColorModel("255255000" + electricDeviceId,"Yellow");
+        ColorModel colorModel5 = new ColorModel("255000255" + electricDeviceId,"Violet");
+        ColorModel colorModel6 = new ColorModel("000255255" + electricDeviceId,"Aqua");
+        ColorModel colorModel7 = new ColorModel("255155255" + electricDeviceId,"White");
+
+        lstColor.add(colorModel1);
+        lstColor.add(colorModel2);
+        lstColor.add(colorModel3);
+        lstColor.add(colorModel4);
+        lstColor.add(colorModel5);
+        lstColor.add(colorModel6);
+        lstColor.add(colorModel7);
+        /*
         Red = (Button) findViewById(R.id.btnRed);
         Green = (Button) findViewById(R.id.btnGreen);
         Blue = (Button) findViewById(R.id.btnBlue);
@@ -48,6 +77,14 @@ public class LightController extends AppCompatActivity {
         More = (Button) findViewById(R.id.btnMore);
 
         Back = (Button) findViewById(R.id.btnBack);
+        */
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+
+        adapter = new ColorAdapter(this, lstColor);
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
         tv_devicename = (TextView) findViewById(R.id.nameDevice);
         tv_color = (TextView) findViewById(R.id.txtColor);
@@ -113,6 +150,7 @@ public class LightController extends AppCompatActivity {
         }
 
 
+        /*
         Red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -329,7 +367,7 @@ public class LightController extends AppCompatActivity {
                 finish();
             }
         });
-
+*/
 
     }
 
