@@ -37,13 +37,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="50dp"
                 android:layout_marginBottom="4dp"
                 android:layout_toEndOf="@+id/device_photo"
                 android:text=""
                 android:trackTint="@color/colorDark"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/device_photo" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
                 android:id="@+id/device_photo"

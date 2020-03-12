@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +22,11 @@ import static com.example.smartapp.MainActivity.processMQTT;
 public class LightController extends AppCompatActivity {
 
     //Button Red, Green, Blue, Yellow, Violet, Aqua, White, Power, More, Back;
-    TextView tv_devicename, tv_color;
+    LinearLayout More;
+    ImageView Power, btnBack;
+    TextView tv_devicename;
+    public static TextView tv_color;
+
     SeekBar seekBar;
     public int clicked = 0;
     public int valueProgress = 0;
@@ -46,7 +52,9 @@ public class LightController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.light_controller);
 
-
+        More = findViewById(R.id.btnMore);
+        Power = findViewById(R.id.btnPower);
+        btnBack = findViewById(R.id.buttonBack);
 
         ArrayList<ColorModel> lstColor = new ArrayList<>();
 
@@ -148,6 +156,44 @@ public class LightController extends AppCompatActivity {
             //processMQTT.Disconnect();
 
         }
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        More.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LightController.this, ColorPicker.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("ID", Id);
+                bundle.putString("NAME", Name_device);
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        Power.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                color_custom = 0;
+
+                String messeger = "000000000" + Id;
+
+
+                processMQTT.SentMessege("ESP_01",messeger,LightController.this);
+
+                tv_color.setText("Off");
+                Log.d("qoobee","mes: "+messeger);
+            }
+        });
 
 
         /*

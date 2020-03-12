@@ -12,7 +12,7 @@ import static com.example.smartapp.MainActivity.processMQTT;
 
 public class FanController extends AppCompatActivity {
 
-    Button btnOn, btnOff, btnBack;
+    //Button btnOn, btnOff, btnBack;
     SeekBar powerBar;
 
     public int valueProgress = 0;
@@ -23,11 +23,14 @@ public class FanController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fan_controller);
 
+        /*
         btnOn = (Button) findViewById(R.id.buttonOn);
         btnOff = (Button) findViewById(R.id.buttonOff);
         btnBack = (Button) findViewById(R.id.buttonBack);
+        */
         powerBar = (SeekBar) findViewById(R.id.seekBar);
 
+        /*
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +46,13 @@ public class FanController extends AppCompatActivity {
             }
         });
 
+          btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+*/
 
         powerBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -76,11 +86,6 @@ public class FanController extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
     }
 }

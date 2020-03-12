@@ -23,14 +23,14 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
 
 
     private LayoutInflater inflater;
-    private ArrayList<ColorModel> imageModelArrayList;
+    private ArrayList<ColorModel> lstColor;
     private MyRecyclerViewAdapter.ItemClickListener mClickListener;
     private Context context;
 
-    public ColorAdapter(Context ctx, ArrayList<ColorModel> imageModelArrayList){
+    public ColorAdapter(Context ctx, ArrayList<ColorModel> lstColor){
 
         inflater = LayoutInflater.from(ctx);
-        this.imageModelArrayList = imageModelArrayList;
+        this.lstColor = lstColor;
         context = ctx;
     }
 
@@ -47,42 +47,49 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
     public void onBindViewHolder(ColorAdapter.MyViewHolder holder, int position) {
 
 
-        holder.colorname.setText(imageModelArrayList.get(position).getColorName());
-        String color = imageModelArrayList.get(position).getColorName();
+        holder.colorname.setText(lstColor.get(position).getColorName());
+        String color = lstColor.get(position).getColorName();
 
         if(color.equals("Red"))
         {
             holder.cl.setBackgroundResource(R.color.colorRed);
+
         }
 
         if(color.equals("Green"))
         {
             holder.cl.setBackgroundResource(R.color.colorGreen);
+
         }
 
         if(color.equals("Blue"))
         {
             holder.cl.setBackgroundResource(R.color.colorBlue);
+
         }
 
         if(color.equals("Yellow"))
         {
             holder.cl.setBackgroundResource(R.color.colorYellow);
+
         }
 
         if(color.equals("Violet"))
         {
             holder.cl.setBackgroundResource(R.color.colorViolet);
+
         }
 
         if(color.equals("Aqua"))
         {
             holder.cl.setBackgroundResource(R.color.colorAqua);
+
         }
 
         if(color.equals("White"))
         {
             holder.cl.setBackgroundResource(R.color.colorCard);
+
         }
 
 
@@ -90,7 +97,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return imageModelArrayList.size();
+        return lstColor.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -112,7 +119,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
 
             ColorModel colorModel = new ColorModel();
-            colorModel = imageModelArrayList.get(getAdapterPosition());
+            colorModel = lstColor.get(getAdapterPosition());
 
 
 
@@ -125,6 +132,8 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
 
 
             processMQTT.SentMessege("ESP_01",mes,context);
+
+            LightController.tv_color.setText(colorModel.getColorName());
 
 
             //tv_color.setText("Red");
