@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import static com.example.smartapp.MainActivity.processMQTT;
 
 public class FanController extends AppCompatActivity {
 
-    //Button btnOn, btnOff, btnBack;
+    Button btnOn, btnOff;
     SeekBar powerBar;
+    ImageView btnBack;
+    TextView txtStatus;
 
     public int valueProgress = 0;
     public float valuePower = 700;
@@ -28,13 +32,18 @@ public class FanController extends AppCompatActivity {
         btnOff = (Button) findViewById(R.id.buttonOff);
         btnBack = (Button) findViewById(R.id.buttonBack);
         */
-        powerBar = (SeekBar) findViewById(R.id.seekBar);
+        powerBar =  findViewById(R.id.seekBar);
+        btnOn =  findViewById(R.id.buttonOn);
+        btnOff =  findViewById(R.id.buttonOff);
+        btnBack =  findViewById(R.id.buttonBack);
+        txtStatus = findViewById(R.id.textStatus);
 
-        /*
+
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 processMQTT.SentMessege("ESP_02","ON0",FanController.this);
+                txtStatus.setText("ON");
             }
         });
 
@@ -43,6 +52,7 @@ public class FanController extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 processMQTT.SentMessege("ESP_02","OFF0",FanController.this);
+                txtStatus.setText("OFF");
             }
         });
 
@@ -52,7 +62,7 @@ public class FanController extends AppCompatActivity {
                 finish();
             }
         });
-*/
+
 
         powerBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

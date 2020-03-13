@@ -5,26 +5,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import static com.example.smartapp.MainActivity.processMQTT;
 
 public class DoorController extends AppCompatActivity {
 
-    Button btnOn, btnOff, btnBack;
+    Button btnOn, btnOff;
+    ImageView btnBack;
+    TextView txtStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.door_controller);
 
-        btnOn = (Button) findViewById(R.id.buttonOn);
-        btnOff = (Button) findViewById(R.id.buttonOff);
-        btnBack = (Button) findViewById(R.id.buttonBack);
+
+        btnOn =  findViewById(R.id.buttonOn);
+        btnOff =  findViewById(R.id.buttonOff);
+        btnBack =  findViewById(R.id.buttonBack);
+
+
+
 
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 processMQTT.SentMessege("ESP_04","ON0",DoorController.this);
+                txtStatus.setText("ON");
             }
         });
 
@@ -33,6 +42,7 @@ public class DoorController extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 processMQTT.SentMessege("ESP_04","OFF0",DoorController.this);
+                txtStatus.setText("OFF");
             }
         });
 

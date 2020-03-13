@@ -19,18 +19,23 @@ public class TabDeviceController extends Fragment {
 
     Button buttonAdd;
 
+    MyRecyclerViewAdapter adapter;
+
+    RecyclerView recyclerView;
+
+    public static ArrayList<ElectricDevice> lstDeviceElectric = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MyRecyclerViewAdapter adapter;
+        //MyRecyclerViewAdapter adapter;
 
         View view = inflater.inflate(R.layout.tab_device_controller, container, false);
 
         buttonAdd = view.findViewById(R.id.btnAdd);
 
-        ArrayList<ElectricDevice> lstDevice = new ArrayList<>();
+        //ArrayList<ElectricDevice> lstDevice = new ArrayList<>();
 
-
+/*
         ElectricDevice device1 = new ElectricDevice("5","LED sáng đục","device_light","none");
         ElectricDevice device2 = new ElectricDevice("5","Đèn bàn học","device_light","none");
         ElectricDevice device3 = new ElectricDevice("5","LED siêu sáng","device_light","none");
@@ -50,13 +55,15 @@ public class TabDeviceController extends Fragment {
         lstDevice.add(device7);
         //lstDevice.add(device4);
 
-        RecyclerView recyclerView = view.findViewById(R.id.rv);
+        */
+
+        recyclerView = view.findViewById(R.id.rv);
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), numberOfColumns));
 
 
 
-        adapter = new MyRecyclerViewAdapter(getActivity().getApplicationContext(), lstDevice);
+        adapter = new MyRecyclerViewAdapter(getActivity().getApplicationContext(), lstDeviceElectric);
 
         recyclerView.setAdapter(adapter);
 
@@ -85,10 +92,43 @@ public class TabDeviceController extends Fragment {
 
         return view;
     }
-
-
-
     //tcp://broker.mqttdashboard.com:1883
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        //processMQTT.Disconnect();
+// add your code here which executes when user leaving the current fragment or fragment is no longer intractable.
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        adapter = new MyRecyclerViewAdapter(getActivity().getApplicationContext(), lstDeviceElectric);
+
+        recyclerView.setAdapter(adapter);
+        //processMQTT.Disconnect();
+        //processMQTT.startMqtt(getActivity().getApplicationContext());
+
+// add your code here which executes when user leaving the current fragment or fragment is no longer intractable.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        //processMQTT.Disconnect();
+// add your code here which executes Fragment going to be stopped.
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+// add your code here which executes when the final clean up for the Fragment's state is needed.
+    }
 
 }

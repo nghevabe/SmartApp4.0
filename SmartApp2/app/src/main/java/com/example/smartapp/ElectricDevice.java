@@ -8,6 +8,7 @@ public class ElectricDevice {
     String name;
     String type;
     String value;
+    String node;
 
     public ElectricDevice() {
     }
@@ -17,6 +18,14 @@ public class ElectricDevice {
         this.name = name;
         this.type = type;
         this.value = value;
+    }
+
+    public ElectricDevice(String id, String name, String type, String value, String node) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.node = node;
     }
 
     public String getId() {
@@ -51,6 +60,15 @@ public class ElectricDevice {
         this.value = value;
     }
 
+    public String getNode() {
+        return node;
+    }
+
+    public void setNode(String node) {
+        this.node = node;
+    }
+
     private List<ElectricDevice> device;
+
 
 }

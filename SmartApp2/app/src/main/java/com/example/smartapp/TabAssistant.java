@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
@@ -140,6 +141,7 @@ public class TabAssistant extends Fragment {
 
             }
         });
+
 
         SetupVoice();
 
@@ -490,11 +492,12 @@ public class TabAssistant extends Fragment {
 
     public void SetupVoice(){
 
+        /*
         if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO}, 1);
         }
-
+*/
         mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity().getApplicationContext());
         mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -534,5 +537,7 @@ public class TabAssistant extends Fragment {
         processMQTT.Disconnect();
 // add your code here which executes when the final clean up for the Fragment's state is needed.
     }
+
+
 
 }

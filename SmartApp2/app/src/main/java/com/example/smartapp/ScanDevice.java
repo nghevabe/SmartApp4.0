@@ -45,9 +45,11 @@ public class ScanDevice extends AppCompatActivity {
     WifiManager mainWifiObj;
     ImageView btnBack;
 
+    String idDevice;
+    String nodeDevice;
+
     ArrayList<String> lstDevice = new ArrayList<>();
 
-    private final int MY_PERMISSIONS_ACCESS_COARSE_LOCATION = 1;
 
     ListView list;
     String wifis[];
@@ -67,7 +69,8 @@ public class ScanDevice extends AppCompatActivity {
         //
         mainWifiObj = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
-        Check();
+        SetupPermission setupPermission = new SetupPermission();
+        setupPermission.SetupLocation(ScanDevice.this);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +105,9 @@ public class ScanDevice extends AppCompatActivity {
 
                 String name = lstDevice.get(i).toString();
 
+                idDevice = getIdDevice(name);
+                nodeDevice = name;
+
                 ConnectToAccessPoint(name,"12345678");
 
                 ShowDialogSharedWifi();
@@ -118,46 +124,71 @@ public class ScanDevice extends AppCompatActivity {
         LayoutInflater li = LayoutInflater.from(ScanDevice.this);
         View DialogView = li.inflate(R.layout.send_dialog, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 ScanDevice.this);
 
         // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText nameWifiInput = (EditText) DialogView
+        final EditText nameWifiInput =  DialogView
                 .findViewById(R.id.edId);
 
-        final EditText passWifiInput = (EditText) DialogView
+        final EditText passWifiInput =  DialogView
                 .findViewById(R.id.edPass);
 
-        alertDialogBuilder
-                .setCancelable(false)
-                .setTitle("Share Wifi with Device to Connect")
-                .setPositiveButton("Connect",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // get user input and set it to result
-                                // edit text
-                                //result.setText(userInput.getText());
-                                String nameWifi = nameWifiInput.getText().toString();
-                                String passWifi = passWifiInput.getText().toString();
+        final EditText nameDeviceInput =  DialogView
+                .findViewById(R.id.edName);
 
-                                ShareWifi(nameWifi,passWifi);
-                                ReConnectWifi();
-                            }
-                        })
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                dialog.cancel();
-                            }
-                        });
+        final Button btnConnect =  DialogView
+                .findViewById(R.id.buttonConnect);
+
+        final Button btnCancel =  DialogView
+                .findViewById(R.id.buttonCancel);
+
+        final ImageView btnClose =  DialogView
+                .findViewById(R.id.buttonClose);
 
         // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
+        final AlertDialog alertDialog = alertDialogBuilder.create();
 
         // show it
         alertDialog.show();
+
+
+        btnConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String nameWifi = nameWifiInput.getText().toString();
+                String passWifi = passWifiInput.getText().toString();
+                String nameDevice = nameDeviceInput.getText().toString();
+
+                ShareWifi(nameWifi,passWifi);
+                ReConnectWifi();
+
+                ElectricDevice electricDevice = new ElectricDevice(idDevice,nameDevice,"device_light","none",nodeDevice);
+
+                TabDeviceController.lstDeviceElectric.add(electricDevice);
+
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+                ReConnectWifi();
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+                ReConnectWifi();
+            }
+        });
+
 
 
     }
@@ -218,24 +249,7 @@ public class ScanDevice extends AppCompatActivity {
     }
 
 
-    public void Check() {
 
-        int permission_wifi1 = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_WIFI_STATE);
-
-        int permission_wifi2 = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CHANGE_WIFI_STATE);
-
-        int permission_wifi3 = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_NETWORK_STATE);
-
-        if (permission_wifi1 != PackageManager.PERMISSION_GRANTED
-                || permission_wifi2 != PackageManager.PERMISSION_GRANTED
-                || permission_wifi3 != PackageManager.PERMISSION_GRANTED) {
-            makeRequest();
-        }
-
-    }
 
     protected void makeRequest() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_WIFI_STATE,
@@ -284,6 +298,17 @@ public class ScanDevice extends AppCompatActivity {
 
     }
 
+    public String getIdDevice(String devicename){
+
+        String result = "";
+        int lastIndex = devicename.length() - 1;
+        char id = devicename.charAt(lastIndex);
+
+        result = result + id;
+
+        return result;
+    }
+
 
     BroadcastReceiver wifiReceiver = new BroadcastReceiver() {
 
@@ -301,6 +326,7 @@ public class ScanDevice extends AppCompatActivity {
             for(int i=0;i<wifiScanList.size();i++){
 
                 if(wifiScanList.get(i).SSID.contains("ESP")) {
+
 
                     lstDevice.add(wifiScanList.get(i).SSID);
                 }
@@ -325,12 +351,13 @@ public class ScanDevice extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-            case MY_PERMISSIONS_ACCESS_COARSE_LOCATION:
+            case 3:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(ScanDevice.this, "permission granted", Toast.LENGTH_SHORT).show();
-                    mainWifiObj.startScan();
+                    //ActivityCompat.requestPermissions(ScanDevice.this, new String[]{Manifest.permission.WRITE_CALENDAR}, 2);
+
+                    //mainWifiObj.startScan();
                 } else {
-                    Toast.makeText(ScanDevice.this, "permission not granted", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ScanDevice.this, "permission not granted", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 break;

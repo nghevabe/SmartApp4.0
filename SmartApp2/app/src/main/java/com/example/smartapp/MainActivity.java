@@ -1,5 +1,6 @@
 package com.example.smartapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    SetupPermission setupPermission = new SetupPermission();
+
     public static ProcessMQTT processMQTT = new ProcessMQTT();
 
     @Override
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(2).setIcon( R.drawable.device_icon);
 
 
+        setupPermission.SetupAudio(MainActivity.this);
 
 
     }
@@ -157,6 +161,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    setupPermission.SetupCalender(MainActivity.this);
+                    //ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_CALENDAR}, 2);
+                }else {
+                    return;
+                }
+                break;
+        }
     }
 
 }

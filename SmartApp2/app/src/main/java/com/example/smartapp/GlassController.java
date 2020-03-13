@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import static com.example.smartapp.MainActivity.processMQTT;
 
 public class GlassController extends AppCompatActivity {
 
-    Button btnOn, btnOff, btnBack;
+    Button btnOn, btnOff;
     SeekBar powerBar;
+    TextView txtStatus;
+    ImageView btnBack;
 
     public int valueProgress = 0;
     public float valuePower = 999;
@@ -24,16 +28,21 @@ public class GlassController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.glass_controller);
 
-        btnOn = (Button) findViewById(R.id.buttonOn);
-        btnOff = (Button) findViewById(R.id.buttonOff);
-        btnBack = (Button) findViewById(R.id.buttonBack);
+
+        btnOn =  findViewById(R.id.buttonOn);
+        btnOff =  findViewById(R.id.buttonOff);
+        btnBack =  findViewById(R.id.buttonBack);
+        txtStatus = findViewById(R.id.textStatus);
+
         powerBar = (SeekBar) findViewById(R.id.seekBar);
+
 
 
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 processMQTT.SentMessege("ESP_03","ON0",GlassController.this);
+                txtStatus.setText("ON");
             }
         });
 
@@ -42,8 +51,18 @@ public class GlassController extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 processMQTT.SentMessege("ESP_03","OFF0",GlassController.this);
+                txtStatus.setText("OFF");
             }
         });
+
+           btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
 
         powerBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -70,12 +89,7 @@ public class GlassController extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
 
     }
 }
