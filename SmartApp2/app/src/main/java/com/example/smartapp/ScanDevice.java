@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +19,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -108,8 +110,6 @@ public class ScanDevice extends AppCompatActivity {
                 idDevice = getIdDevice(name);
                 nodeDevice = name;
 
-                ConnectToAccessPoint(name,"12345678");
-
                 ShowDialogSharedWifi();
 
                 Toast.makeText(ScanDevice.this, "Name: "+name, Toast.LENGTH_SHORT).show();
@@ -159,16 +159,21 @@ public class ScanDevice extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+
+
+
                 String nameWifi = nameWifiInput.getText().toString();
                 String passWifi = passWifiInput.getText().toString();
                 String nameDevice = nameDeviceInput.getText().toString();
 
-                ShareWifi(nameWifi,passWifi);
-                ReConnectWifi();
+                //ConnectToAccessPoint(nodeDevice,"12345678");
 
-                ElectricDevice electricDevice = new ElectricDevice(idDevice,nameDevice,"device_light","none",nodeDevice);
+                WaitingConnect(nameWifi,passWifi,nameDevice);
 
-                TabDeviceController.lstDeviceElectric.add(electricDevice);
+                alertDialog.cancel();
+
+
 
             }
         });
@@ -177,7 +182,7 @@ public class ScanDevice extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog.cancel();
-                ReConnectWifi();
+
             }
         });
 
@@ -185,7 +190,7 @@ public class ScanDevice extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog.cancel();
-                ReConnectWifi();
+
             }
         });
 
@@ -193,20 +198,72 @@ public class ScanDevice extends AppCompatActivity {
 
     }
 
-    public void ReConnectWifi(){
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ConnectToAccessPoint("K2","2910311770");
-            }
-        }, 2000);
+    public void WaitingConnect(final String id, final String pass, final String name){
+
+        final ProgressDialog loading_dialog = ProgressDialog.show(ScanDevice.this, "",
+                "Waiting to connect...", true);
+
+        ConnectToAccessPoint(nodeDevice,"12345678");
+
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(ScanDevice.this, "Connection Ready", Toast.LENGTH_SHORT).show();
+
+
+
+                ShareWifi(id,pass);
+
+
+
+                ReConnectWifi(id,pass);
+
+
             }
-        }, 6000);
+        }, 8000);
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loading_dialog.cancel();
+
+                ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                //WifiInfo wifiInfo = connManager.getCon
+                WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                String ssid = wifiInfo.getSSID();
+
+                if (mWifi.isConnected() && !ssid.contains("ESP")) {
+                    finish();
+                    Toast.makeText(ScanDevice.this, "Connection Ready", Toast.LENGTH_SHORT).show();
+
+                    ElectricDevice electricDevice = new ElectricDevice(idDevice,name,"device_light","none",nodeDevice);
+
+                    TabDeviceController.lstDeviceElectric.add(electricDevice);
+
+                } else {
+                    Toast.makeText(ScanDevice.this, "Connection Fail, please re-check id and pass", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+        }, 20000);
+
+    }
+
+    public void ReConnectWifi(final String id,final String pass){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ConnectToAccessPoint(id,pass);
+            }
+        }, 3000);
+
+
 
     }
 
@@ -282,9 +339,12 @@ public class ScanDevice extends AppCompatActivity {
 
 
                         // Demo();
+                        if(result != null) {
 
-                         Toast.makeText(ScanDevice.this, "Connecting to "+result, Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(ScanDevice.this, "Connecting to " + result, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(ScanDevice.this, "Connecting Fail " + result, Toast.LENGTH_SHORT).show();
+                        }
                         //Log.d("nnn" ,result);
 
 

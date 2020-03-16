@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -23,6 +24,9 @@ public class TabDeviceController extends Fragment {
 
     RecyclerView recyclerView;
 
+    TextView txtNumber,txtRecycleview;
+
+
     public static ArrayList<ElectricDevice> lstDeviceElectric = new ArrayList<>();
 
     @Override
@@ -33,29 +37,9 @@ public class TabDeviceController extends Fragment {
 
         buttonAdd = view.findViewById(R.id.btnAdd);
 
-        //ArrayList<ElectricDevice> lstDevice = new ArrayList<>();
+        txtNumber = view.findViewById(R.id.textNumber);
+        txtRecycleview = view.findViewById(R.id.textRecycleview);
 
-/*
-        ElectricDevice device1 = new ElectricDevice("5","LED sáng đục","device_light","none");
-        ElectricDevice device2 = new ElectricDevice("5","Đèn bàn học","device_light","none");
-        ElectricDevice device3 = new ElectricDevice("5","LED siêu sáng","device_light","none");
-        ElectricDevice device4 = new ElectricDevice("5","Đèn đọc sách","device_light","none");
-
-        ElectricDevice device5 = new ElectricDevice("5","LED 1","device_light","none");
-        ElectricDevice device6 = new ElectricDevice("5","LED 2","device_light","none");
-        ElectricDevice device7 = new ElectricDevice("5","LED 3","device_light","none");
-        //ElectricDevice device4 = new ElectricDevice("4","Đèn sân","light","none");
-
-        lstDevice.add(device1);
-        lstDevice.add(device2);
-        lstDevice.add(device3);
-        lstDevice.add(device4);
-        lstDevice.add(device5);
-        lstDevice.add(device6);
-        lstDevice.add(device7);
-        //lstDevice.add(device4);
-
-        */
 
         recyclerView = view.findViewById(R.id.rv);
         int numberOfColumns = 2;
@@ -67,12 +51,15 @@ public class TabDeviceController extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
+        txtNumber.setText(""+lstDeviceElectric.size());
 
+        if(lstDeviceElectric.size() == 0){
+            txtRecycleview.setVisibility(View.VISIBLE);
+        } else {
+            txtRecycleview.setVisibility(View.INVISIBLE);
+        }
 
         //startMqtt();
-
-
-
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +93,14 @@ public class TabDeviceController extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        txtNumber.setText(""+lstDeviceElectric.size());
+
+        if(lstDeviceElectric.size() == 0){
+            txtRecycleview.setVisibility(View.VISIBLE);
+        } else {
+            txtRecycleview.setVisibility(View.INVISIBLE);
+        }
 
         adapter = new MyRecyclerViewAdapter(getActivity().getApplicationContext(), lstDeviceElectric);
 
