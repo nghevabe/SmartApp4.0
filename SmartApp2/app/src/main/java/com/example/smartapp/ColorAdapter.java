@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static com.example.smartapp.LightController.electricDeviceNode;
 import static com.example.smartapp.MainActivity.processMQTT;
 import static com.example.smartapp.LightController.mes;
 import static com.example.smartapp.LightController.color_custom;
@@ -131,7 +132,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
             ColorDevider(colorModel.getColorName());
 
 
-            processMQTT.SentMessege("ESP_01",mes,context);
+            processMQTT.SentMessege(electricDeviceNode,mes,context);
 
             LightController.tv_color.setText(colorModel.getColorName());
 

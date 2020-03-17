@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -34,11 +35,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+//import com.example.smartapp.DeviceController.ProcessMQTT;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ScanDevice extends AppCompatActivity {
 
@@ -74,6 +77,10 @@ public class ScanDevice extends AppCompatActivity {
         SetupPermission setupPermission = new SetupPermission();
         setupPermission.SetupLocation(ScanDevice.this);
 
+
+
+
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,8 +95,20 @@ public class ScanDevice extends AppCompatActivity {
 
                //ConnectToAccessPoint("QooBee","12345678");
 
-                scanWifi();
 
+                scanWifi();
+                //SaveData("save_anal","xxx");
+                //getAllKey();
+
+/*
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+
+                //editor.remove("save_anal"); // will delete key name
+                //editor.remove("save1"); // will delete key email
+                editor.clear();
+                editor.commit();
+*/
 
 
                 }
@@ -118,6 +137,36 @@ public class ScanDevice extends AppCompatActivity {
 
     }
 
+    public void SaveData(String node, String data){
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.putString(node, data); // Storing string
+        editor.commit(); // commit changes
+
+
+    }
+
+    public void getAllKey(){
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        Map<String,?> keys = pref.getAll();
+
+
+
+        for(Map.Entry<String,?> entry : keys.entrySet()){
+            //Log.d("squirting",entry.getKey() + ": " + entry.getValue().toString());
+            String data = entry.getValue().toString();
+            String[] data_cut = data.split("-");
+            Log.d("squirting","id: "+data_cut[0] + " name: "+data_cut[1] + " node: "+entry.getKey());
+
+            ElectricDevice electricDevice = new ElectricDevice(data_cut[0],data_cut[1],"device_light","none",entry.getKey());
+
+            TabDeviceController.lstDeviceElectric.add(electricDevice);
+        }
+
+    }
 
     public void ShowDialogSharedWifi(){
 
@@ -160,8 +209,7 @@ public class ScanDevice extends AppCompatActivity {
             public void onClick(View view) {
 
 
-
-
+                MainActivity.processMQTT.Disconnect();
 
                 String nameWifi = nameWifiInput.getText().toString();
                 String passWifi = passWifiInput.getText().toString();
@@ -237,12 +285,17 @@ public class ScanDevice extends AppCompatActivity {
                 String ssid = wifiInfo.getSSID();
 
                 if (mWifi.isConnected() && !ssid.contains("ESP")) {
+                    MainActivity.processMQTT.startMqtt(ScanDevice.this);
                     finish();
                     Toast.makeText(ScanDevice.this, "Connection Ready", Toast.LENGTH_SHORT).show();
 
                     ElectricDevice electricDevice = new ElectricDevice(idDevice,name,"device_light","none",nodeDevice);
 
                     TabDeviceController.lstDeviceElectric.add(electricDevice);
+
+                    String data = idDevice + "-" + name + "-" + "device_light"+ "-" +nodeDevice;
+
+                    SaveData(nodeDevice,data);
 
                 } else {
                     Toast.makeText(ScanDevice.this, "Connection Fail, please re-check id and pass", Toast.LENGTH_SHORT).show();

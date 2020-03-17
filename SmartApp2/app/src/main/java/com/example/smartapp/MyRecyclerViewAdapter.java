@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.smartapp.LightController.electricDeviceNode;
 import static com.example.smartapp.MainActivity.processMQTT;
 import static com.example.smartapp.LightController.electricDeviceId;
 import static com.example.smartapp.LightController.electricDeviceName;
+//import static com.example.smartapp.MainActivity.processMQTT2;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
@@ -59,6 +61,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         final String device_id = electricDevice.id;
         final String type_device = electricDevice.type;
+        final String node = electricDevice.node;
 
         holder.tvName.setText(electricDevice.name);
         if(electricDevice.type.contains("light")) {
@@ -81,16 +84,22 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-                if(type_device.equals("light")) {
+                if(type_device.contains("light")) {
 
                     if (b == true) {
-                        Log.d("SEX", "ID: " + position + " Turn On");
-                        processMQTT.SentMessege("ESP_01", "255255255" + device_id, context);
+                        Log.d("SEX", "ID: " + position + " Turn On " + node + " id: "+device_id);
+                        processMQTT.SentMessege(node, "255255255" + device_id, context);
+                        if(TabDeviceController.turnIt == 1){
+                           // processMQTT2.SentMessege(node, "255255255" + device_id, context);
+                        }
                     }
 
                     if (b == false) {
                         Log.d("SEX", "ID: " + position + " Turn Off");
-                        processMQTT.SentMessege("ESP_01", "000000000" + device_id, context);
+                        processMQTT.SentMessege(node, "000000000" + device_id, context);
+                        if(TabDeviceController.turnIt == 1){
+                            //processMQTT2.SentMessege(node, "000000000" + device_id, context);
+                        }
                     }
                     //Log.d("SEX","ID: "+position);
                 }
@@ -130,9 +139,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             ElectricDevice electricDevice = new ElectricDevice();
             electricDevice = lstDevice.get(getAdapterPosition());
 
-            if(!electricDevice.type.contains("device_")) {
+            //if(!electricDevice.type.contains("device_")) {
+
 
                 if(electricDevice.type.contains("light")) {
+
+                    if(electricDevice.type.contains("device_")){
+                        TabDeviceController.turnIt = 1;
+                    }
 
                     Intent intent = new Intent(context, LightController.class);
                     Bundle bundle = new Bundle();
@@ -144,6 +158,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                     electricDeviceId = electricDevice.id;
                     electricDeviceName = electricDevice.name;
+                    electricDeviceNode = electricDevice.node;
 
                     context.startActivity(intent);
                 }
@@ -192,7 +207,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                     context.startActivity(intent);
                 }
-            }
+           // }
 
 
 

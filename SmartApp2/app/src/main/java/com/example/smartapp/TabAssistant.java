@@ -109,7 +109,7 @@ public class TabAssistant extends Fragment {
 
         mRecyclerView.setAdapter(mRcvAdapter);
 
-        processMQTT.startMqtt(getActivity().getApplicationContext());
+       // processMQTT.startMqtt(getActivity().getApplicationContext());
 
 
 
@@ -534,7 +534,7 @@ public class TabAssistant extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        processMQTT.Disconnect();
+        //processMQTT.Disconnect();
 // add your code here which executes when the final clean up for the Fragment's state is needed.
     }
 

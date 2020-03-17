@@ -36,6 +36,7 @@ public class LightController extends AppCompatActivity {
     public static int color_custom=0;
     public static String electricDeviceId;
     public static String electricDeviceName;
+    public static String electricDeviceNode;
 
 
 
@@ -102,11 +103,11 @@ public class LightController extends AppCompatActivity {
 
 
         Bundle bundle = getIntent().getExtras();
-        final String Id = bundle.getString("ID");
-        final String Name_device = bundle.getString("NAME");
-        tv_devicename.setText(Name_device);
+        //final String Id = bundle.getString("ID");
+        //final String Name_device = bundle.getString("NAME");
+        tv_devicename.setText(electricDeviceName);
 
-        mes = "255255255" + Id;
+        mes = "255255255" + electricDeviceId;
 
 
 
@@ -132,9 +133,9 @@ public class LightController extends AppCompatActivity {
                     valuePower = (float) 255 / 100 * valueProgress;
                     Log.d("xbox", "value: " + valuePower);
 
-                    mes = CreateMesseger(mes) + Id;
+                    mes = CreateMesseger(mes) + electricDeviceId;
 
-                    processMQTT.SentMessege("ESP_01",mes,LightController.this);
+                    processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
                 }
 
                 if(color_custom==1){
@@ -151,7 +152,7 @@ public class LightController extends AppCompatActivity {
 
 
         if(color_custom == 1){
-            GetColorCustom(Id);
+            GetColorCustom(electricDeviceId);
         } else {
             //processMQTT.Disconnect();
 
@@ -170,8 +171,8 @@ public class LightController extends AppCompatActivity {
                 Intent intent = new Intent(LightController.this, ColorPicker.class);
 
                 Bundle bundle = new Bundle();
-                bundle.putString("ID", Id);
-                bundle.putString("NAME", Name_device);
+                bundle.putString("ID", electricDeviceId);
+                bundle.putString("NAME", electricDeviceName);
                 intent.putExtras(bundle);
 
                 startActivity(intent);
@@ -185,10 +186,10 @@ public class LightController extends AppCompatActivity {
 
                 color_custom = 0;
 
-                String messeger = "000000000" + Id;
+                String messeger = "000000000" + electricDeviceId;
 
 
-                processMQTT.SentMessege("ESP_01",messeger,LightController.this);
+                processMQTT.SentMessege(electricDeviceNode,messeger,LightController.this);
 
                 tv_color.setText("Off");
                 Log.d("qoobee","mes: "+messeger);
@@ -216,7 +217,7 @@ public class LightController extends AppCompatActivity {
                 mes = strValue + "000000" + Id;
 
 
-                processMQTT.SentMessege("ESP_01",mes,LightController.this);
+                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
 
 
                 tv_color.setText("Red");
@@ -243,7 +244,7 @@ public class LightController extends AppCompatActivity {
 
                 mes = "000" + strValue + "000" + Id;
 
-                processMQTT.SentMessege("ESP_01",mes,LightController.this);
+                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
 
                 tv_color.setText("Green");
                 Log.d("qoobee","mes: "+mes);
@@ -269,7 +270,7 @@ public class LightController extends AppCompatActivity {
 
                 mes =  "000000" + strValue + Id;
 
-                processMQTT.SentMessege("ESP_01",mes,LightController.this);
+                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
 
                 tv_color.setText("Blue");
                 Log.d("qoobee","mes: "+mes);
@@ -294,7 +295,7 @@ public class LightController extends AppCompatActivity {
 
                 mes = strValue + strValue + "000" + Id;
 
-                processMQTT.SentMessege("ESP_01",mes,LightController.this);
+                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
 
                 tv_color.setText("Yellow");
                 Log.d("qoobee","mes: "+mes);
@@ -319,7 +320,7 @@ public class LightController extends AppCompatActivity {
 
                 mes = strValue + "000" + strValue + Id;
 
-                processMQTT.SentMessege("ESP_01",mes,LightController.this);
+                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
 
                 tv_color.setText("Violet");
                 Log.d("qoobee","mes: "+mes);
@@ -344,7 +345,7 @@ public class LightController extends AppCompatActivity {
 
                 mes = "000" + strValue + strValue + Id;
 
-                processMQTT.SentMessege("ESP_01",mes,LightController.this);
+                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
 
                 tv_color.setText("Aqua");
                 Log.d("qoobee","mes: "+mes);
@@ -369,7 +370,7 @@ public class LightController extends AppCompatActivity {
 
                 mes = strValue + strValue + strValue + Id;
 
-                processMQTT.SentMessege("ESP_01",mes,LightController.this);
+                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
 
                 tv_color.setText("White");
                 Log.d("qoobee","mes: "+mes);
@@ -385,7 +386,7 @@ public class LightController extends AppCompatActivity {
                 String messeger = "000000000" + Id;
 
 
-                processMQTT.SentMessege("ESP_01",messeger,LightController.this);
+                processMQTT.SentMessege(electricDeviceNode,messeger,LightController.this);
 
                 tv_color.setText("Off");
                 Log.d("qoobee","mes: "+messeger);
@@ -456,7 +457,7 @@ public class LightController extends AppCompatActivity {
 
         mes = R+G+B + Id;
 
-        processMQTT.SentMessege("ESP_01",mes,LightController.this);
+        processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
 
         tv_color.setText("Color Custom");
 

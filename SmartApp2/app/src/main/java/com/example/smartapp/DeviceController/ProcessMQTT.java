@@ -72,6 +72,7 @@ public class ProcessMQTT {
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     // Something went wrong e.g. connection timeout or firewall problems
                     Toast.makeText(context, "FAIL", Toast.LENGTH_SHORT).show();
+                    Log.e("squirting","e: "+exception.toString());
 
                 }
 

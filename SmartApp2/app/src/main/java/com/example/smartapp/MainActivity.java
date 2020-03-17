@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     SetupPermission setupPermission = new SetupPermission();
 
     public static ProcessMQTT processMQTT = new ProcessMQTT();
+   // public static ProcessMQTT processMQTT2 = new ProcessMQTT();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon( R.drawable.bot_icon);
         tabLayout.getTabAt(1).setIcon( R.drawable.house_icon);
         tabLayout.getTabAt(2).setIcon( R.drawable.device_icon);
+
+        processMQTT.startMqtt(MainActivity.this);
 
 
         setupPermission.SetupAudio(MainActivity.this);
