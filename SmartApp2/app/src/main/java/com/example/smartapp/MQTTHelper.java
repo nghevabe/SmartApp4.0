@@ -18,7 +18,7 @@ public class MQTTHelper {
 
     final String serverUri = "tcp://tailor.cloudmqtt.com:11359";
 
-    final String clientId = "linhtran01";
+    final String clientId = "linhtran02";
     final String subscriptionTopic7 = "SMART_PROJECT/ESP_07";
     //final String subscriptionTopic2 = "SMART_PROJECT/ESP_02";
     //final String subscriptionTopic3 = "SMART_PROJECT/ESP_03";

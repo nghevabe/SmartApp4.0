@@ -265,11 +265,11 @@ public class ScanDevice extends AppCompatActivity {
 
 
 
-                ReConnectWifi(id,pass);
+                //ReConnectWifi(id,pass);
 
 
             }
-        }, 8000);
+        }, 10000);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -304,7 +304,7 @@ public class ScanDevice extends AppCompatActivity {
 
 
             }
-        }, 20000);
+        }, 28000);
 
     }
 
@@ -314,7 +314,7 @@ public class ScanDevice extends AppCompatActivity {
             public void run() {
                 ConnectToAccessPoint(id,pass);
             }
-        }, 3000);
+        }, 6000);
 
 
 
@@ -324,8 +324,21 @@ public class ScanDevice extends AppCompatActivity {
 
     public void ConnectToAccessPoint(String id, String pass){
 
+        String networkSSID = id;
+        String networkPass = pass;
 
+        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        if (!wifiManager.isWifiEnabled()){
+            wifiManager.setWifiEnabled(true);
+        }
 
+        WifiConfiguration wifiConfiguration = new WifiConfiguration();
+        wifiConfiguration.SSID = String.format("\"%s\"", networkSSID);
+        wifiConfiguration.preSharedKey = String.format("\"%s\"", networkPass);
+        int wifiID = wifiManager.addNetwork(wifiConfiguration);
+        wifiManager.enableNetwork(wifiID, true);
+
+/*
         String networkSSID = id;
         String networkPass = pass;
 
@@ -343,6 +356,8 @@ public class ScanDevice extends AppCompatActivity {
         conf.SSID = "\"\"" + networkSSID + "\"\"";
         conf.preSharedKey = "\"" + networkPass + "\"";
         mainWifiObj.addNetwork(conf);
+
+        */
 
     }
 
@@ -379,7 +394,9 @@ public class ScanDevice extends AppCompatActivity {
 
     }
 
-    public void ShareWifi(String nameWifi, String passWifi){
+    public void ShareWifi(final String nameWifi,final String passWifi){
+
+
 
 
 
@@ -395,10 +412,13 @@ public class ScanDevice extends AppCompatActivity {
                         if(result != null) {
 
                             Toast.makeText(ScanDevice.this, "Connecting to " + result, Toast.LENGTH_SHORT).show();
+                            ReConnectWifi(nameWifi,passWifi);
                         }else {
-                            Toast.makeText(ScanDevice.this, "Connecting Fail " + result, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ScanDevice.this, "Connecting Fail To ESP " , Toast.LENGTH_SHORT).show();
                         }
                         //Log.d("nnn" ,result);
+
+                        //ReConnectWifi(nameWifi,passWifi);
 
 
 
@@ -406,6 +426,8 @@ public class ScanDevice extends AppCompatActivity {
 
                     }
                 });
+
+
 
 
 

@@ -1,12 +1,15 @@
 package com.example.smartapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,7 +26,7 @@ public class LightController extends AppCompatActivity {
 
     //Button Red, Green, Blue, Yellow, Violet, Aqua, White, Power, More, Back;
     LinearLayout More;
-    ImageView Power, btnBack;
+    ImageView Power, btnBack, btnDisconnect;
     TextView tv_devicename;
     public static TextView tv_color;
 
@@ -56,6 +59,7 @@ public class LightController extends AppCompatActivity {
         More = findViewById(R.id.btnMore);
         Power = findViewById(R.id.btnPower);
         btnBack = findViewById(R.id.buttonBack);
+        btnDisconnect = findViewById(R.id.buttonDisconnect);
 
         ArrayList<ColorModel> lstColor = new ArrayList<>();
 
@@ -158,6 +162,13 @@ public class LightController extends AppCompatActivity {
 
         }
 
+        btnDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowDialogDisconnect();
+            }
+        });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,224 +208,55 @@ public class LightController extends AppCompatActivity {
         });
 
 
-        /*
-        Red.setOnClickListener(new View.OnClickListener() {
+
+
+    }
+
+    public void ShowDialogDisconnect(){
+
+        LayoutInflater li = LayoutInflater.from(LightController.this);
+        View DialogView = li.inflate(R.layout.disconnect_dialog, null);
+
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                LightController.this);
+
+        alertDialogBuilder.setView(DialogView);
+
+        final Button btnDisconnect =  DialogView
+                .findViewById(R.id.buttonDisconnect);
+
+        final Button btnCancel =  DialogView
+                .findViewById(R.id.buttonCancel);
+
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
+        btnDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                color_custom = 0;
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
 
-                String strValue = Integer.toString((int)valuePower);
+                editor.remove(electricDeviceNode); // will delete key name
 
-                if(strValue.length() == 1){
-                    strValue = "00" + strValue;
-                }
+                editor.commit();
 
-                if(strValue.length() == 2){
-                    strValue = "0" + strValue;
-                }
+                alertDialog.cancel();
 
-                mes = strValue + "000000" + Id;
-
-
-                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
-
-
-                tv_color.setText("Red");
-                Log.d("qoobee","mes: "+mes);
-            }
-        });
-
-
-        Green.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                color_custom = 0;
-
-                String strValue = Integer.toString((int)valuePower);
-
-                if(strValue.length() == 1){
-                    strValue = "00" + strValue;
-                }
-
-                if(strValue.length() == 2){
-                    strValue = "0" + strValue;
-                }
-
-                mes = "000" + strValue + "000" + Id;
-
-                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
-
-                tv_color.setText("Green");
-                Log.d("qoobee","mes: "+mes);
-            }
-        });
-
-
-        Blue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                color_custom = 0;
-
-                String strValue = Integer.toString((int)valuePower);
-
-                if(strValue.length() == 1){
-                    strValue = "00" + strValue;
-                }
-
-                if(strValue.length() == 2){
-                    strValue = "0" + strValue;
-                }
-
-                mes =  "000000" + strValue + Id;
-
-                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
-
-                tv_color.setText("Blue");
-                Log.d("qoobee","mes: "+mes);
-            }
-        });
-
-        Yellow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                color_custom = 0;
-
-                String strValue = Integer.toString((int)valuePower);
-
-                if(strValue.length() == 1){
-                    strValue = "00" + strValue;
-                }
-
-                if(strValue.length() == 2){
-                    strValue = "0" + strValue;
-                }
-
-                mes = strValue + strValue + "000" + Id;
-
-                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
-
-                tv_color.setText("Yellow");
-                Log.d("qoobee","mes: "+mes);
-            }
-        });
-
-        Violet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                color_custom = 0;
-
-                String strValue = Integer.toString((int)valuePower);
-
-                if(strValue.length() == 1){
-                    strValue = "00" + strValue;
-                }
-
-                if(strValue.length() == 2){
-                    strValue = "0" + strValue;
-                }
-
-                mes = strValue + "000" + strValue + Id;
-
-                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
-
-                tv_color.setText("Violet");
-                Log.d("qoobee","mes: "+mes);
-            }
-        });
-
-        Aqua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                color_custom = 0;
-
-                String strValue = Integer.toString((int)valuePower);
-
-                if(strValue.length() == 1){
-                    strValue = "00" + strValue;
-                }
-
-                if(strValue.length() == 2){
-                    strValue = "0" + strValue;
-                }
-
-                mes = "000" + strValue + strValue + Id;
-
-                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
-
-                tv_color.setText("Aqua");
-                Log.d("qoobee","mes: "+mes);
-            }
-        });
-
-        White.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                color_custom = 0;
-
-                String strValue = Integer.toString((int)valuePower);
-
-                if(strValue.length() == 1){
-                    strValue = "00" + strValue;
-                }
-
-                if(strValue.length() == 2){
-                    strValue = "0" + strValue;
-                }
-
-                mes = strValue + strValue + strValue + Id;
-
-                processMQTT.SentMessege(electricDeviceNode,mes,LightController.this);
-
-                tv_color.setText("White");
-                Log.d("qoobee","mes: "+mes);
-            }
-        });
-
-        Power.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                color_custom = 0;
-
-                String messeger = "000000000" + Id;
-
-
-                processMQTT.SentMessege(electricDeviceNode,messeger,LightController.this);
-
-                tv_color.setText("Off");
-                Log.d("qoobee","mes: "+messeger);
-            }
-        });
-
-        More.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LightController.this, ColorPicker.class);
-
-                Bundle bundle = new Bundle();
-                bundle.putString("ID", Id);
-                bundle.putString("NAME", Name_device);
-                intent.putExtras(bundle);
-
-                startActivity(intent);
-                //finish();
-            }
-        });
-
-        Back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 finish();
+
             }
         });
-*/
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+            }
+        });
 
     }
 

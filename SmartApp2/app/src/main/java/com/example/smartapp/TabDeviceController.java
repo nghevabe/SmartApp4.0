@@ -144,7 +144,7 @@ public class TabDeviceController extends Fragment {
 
         turnIt = 1;
 
-        txtNumber.setText(""+lstDeviceElectric.size());
+
 
         if(lstDeviceElectric.size() == 0){
             txtRecycleview.setVisibility(View.VISIBLE);
@@ -153,6 +153,8 @@ public class TabDeviceController extends Fragment {
         }
 
         getAllKey();
+
+        txtNumber.setText(""+lstDeviceElectric.size());
 
         adapter = new MyRecyclerViewAdapter(getActivity().getApplicationContext(), lstDeviceElectric);
 
