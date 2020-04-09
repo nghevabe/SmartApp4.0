@@ -85,7 +85,7 @@ public class SmsReceiver extends BroadcastReceiver {
     public void SendRequest(final String request, final Context context) {
 //http://assistanthome.somee.com/api/assistant?request=
         Ion.with(context)
-                .load("http://assistanthome.somee.com/api/assistant?request=" + request+"&fbclid=IwAR0I_dhyPZ8NgVWFbNCOhH5uHbMqL8A8KxtEKxzFfJNtViOSt8Br0MahEnQ")
+                .load("http://www.assistanthome.somee.com/api/assistant?request=" + request+"&fbclid=IwAR0I_dhyPZ8NgVWFbNCOhH5uHbMqL8A8KxtEKxzFfJNtViOSt8Br0MahEnQ")
                 .asString()
                 .setCallback(new FutureCallback<String>() {
                     @Override

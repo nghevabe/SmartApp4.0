@@ -146,6 +146,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                     if(electricDevice.type.contains("device_")){
                         TabDeviceController.turnIt = 1;
+                    } else{
+                        TabDeviceController.turnIt = 0;
                     }
 
                     Intent intent = new Intent(context, LightController.class);

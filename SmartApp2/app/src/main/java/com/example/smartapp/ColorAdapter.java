@@ -137,8 +137,9 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
             LightController.tv_color.setText(colorModel.getColorName());
 
 
-            //tv_color.setText("Red");
+            //tv_color.setText("Red"); electricDeviceNode
             Log.d("qoobee","mes: "+mes);
+            Log.d("yyy","node: "+electricDeviceNode);
 
         }
     }

@@ -1,21 +1,13 @@
 package com.example.smartapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
@@ -41,7 +33,6 @@ import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ScanDevice extends AppCompatActivity {
 
@@ -55,11 +46,6 @@ public class ScanDevice extends AppCompatActivity {
 
     ArrayList<String> lstDevice = new ArrayList<>();
 
-
-    ListView list;
-    String wifis[];
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +57,10 @@ public class ScanDevice extends AppCompatActivity {
 
         btnBack = findViewById(R.id.buttonBack);
 
-        //
         mainWifiObj = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         SetupPermission setupPermission = new SetupPermission();
         setupPermission.SetupLocation(ScanDevice.this);
-
-
-
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -93,29 +75,12 @@ public class ScanDevice extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               //ConnectToAccessPoint("QooBee","12345678");
-
-
                 scanWifi();
-                //SaveData("save_anal","xxx");
-                //getAllKey();
-
-/*
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                SharedPreferences.Editor editor = pref.edit();
-
-                //editor.remove("save_anal"); // will delete key name
-                //editor.remove("save1"); // will delete key email
-                editor.clear();
-                editor.commit();
-*/
-
 
                 }
 
 
         });
-
 
 
 
@@ -129,7 +94,10 @@ public class ScanDevice extends AppCompatActivity {
                 idDevice = getIdDevice(name);
                 nodeDevice = name;
 
-                ShowDialogSharedWifi();
+                int duplicate = ValidattionDevice(nodeDevice,name);
+                if(duplicate == 0) {
+                    ShowDialogSharedWifi();
+                }
 
                 Toast.makeText(ScanDevice.this, "Name: "+name, Toast.LENGTH_SHORT).show();
             }
@@ -145,26 +113,6 @@ public class ScanDevice extends AppCompatActivity {
         editor.putString(node, data); // Storing string
         editor.commit(); // commit changes
 
-
-    }
-
-    public void getAllKey(){
-
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        Map<String,?> keys = pref.getAll();
-
-
-
-        for(Map.Entry<String,?> entry : keys.entrySet()){
-            //Log.d("squirting",entry.getKey() + ": " + entry.getValue().toString());
-            String data = entry.getValue().toString();
-            String[] data_cut = data.split("-");
-            Log.d("squirting","id: "+data_cut[0] + " name: "+data_cut[1] + " node: "+entry.getKey());
-
-            ElectricDevice electricDevice = new ElectricDevice(data_cut[0],data_cut[1],"device_light","none",entry.getKey());
-
-            TabDeviceController.lstDeviceElectric.add(electricDevice);
-        }
 
     }
 
@@ -217,10 +165,12 @@ public class ScanDevice extends AppCompatActivity {
 
                 //ConnectToAccessPoint(nodeDevice,"12345678");
 
-                WaitingConnect(nameWifi,passWifi,nameDevice);
+                int duplicate = ValidattionDevice(nodeDevice,nameDevice);
+                if(duplicate == 0) {
+                    WaitingConnect(nameWifi,passWifi,nameDevice);
+                }
 
                 alertDialog.cancel();
-
 
 
             }
@@ -243,7 +193,6 @@ public class ScanDevice extends AppCompatActivity {
         });
 
 
-
     }
 
     public void WaitingConnect(final String id, final String pass, final String name){
@@ -259,14 +208,19 @@ public class ScanDevice extends AppCompatActivity {
             @Override
             public void run() {
 
+                ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                //WifiInfo wifiInfo = connManager.getCon
+                WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                String ssid = wifiInfo.getSSID();
 
-
-                ShareWifi(id,pass);
-
-
-
-                //ReConnectWifi(id,pass);
-
+                if (mWifi.isConnected() && ssid.contains("ESP")) {
+                    ShareWifi(id,pass);
+                } else {
+                    Toast.makeText(ScanDevice.this, "Connection to Device Fail", Toast.LENGTH_SHORT).show();
+                    loading_dialog.cancel();
+                }
 
             }
         }, 10000);
@@ -296,6 +250,8 @@ public class ScanDevice extends AppCompatActivity {
                     String data = idDevice + "-" + name + "-" + "device_light"+ "-" +nodeDevice;
 
                     SaveData(nodeDevice,data);
+
+
 
                 } else {
                     Toast.makeText(ScanDevice.this, "Connection Fail, please re-check id and pass", Toast.LENGTH_SHORT).show();
@@ -375,12 +331,35 @@ public class ScanDevice extends AppCompatActivity {
 
 
 
+    public int ValidattionDevice(String node, String name){
+        int result = 0;
 
-    protected void makeRequest() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_WIFI_STATE,
-                Manifest.permission.CHANGE_WIFI_STATE,
-                Manifest.permission.ACCESS_NETWORK_STATE}, 1);
+
+        for(int i=0;i<TabDeviceController.lstDeviceElectric.size();i++){
+
+            ElectricDevice electricDevice = TabDeviceController.lstDeviceElectric.get(i);
+
+            if(electricDevice.node.equals(node))
+            {
+                result = 1;
+                Toast.makeText(ScanDevice.this, "This device is already connected", Toast.LENGTH_SHORT).show();
+            }
+
+            if(electricDevice.name.equals(name))
+            {
+                result = 1;
+                Toast.makeText(ScanDevice.this, "This name is already in use", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+
+
+
+        return result;
+
     }
+
 
     private void scanWifi() {
 
@@ -470,11 +449,8 @@ public class ScanDevice extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(ScanDevice.this,
                     android.R.layout.simple_list_item_1, android.R.id.text1, lstDevice);
 
-
             // Assign adapter to ListView
             listView.setAdapter(adapter);
-
-
 
 
 
@@ -482,21 +458,5 @@ public class ScanDevice extends AppCompatActivity {
 
     };
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 3:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //ActivityCompat.requestPermissions(ScanDevice.this, new String[]{Manifest.permission.WRITE_CALENDAR}, 2);
-
-                    //mainWifiObj.startScan();
-                } else {
-                    //Toast.makeText(ScanDevice.this, "permission not granted", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                break;
-        }
-    }
 
 }

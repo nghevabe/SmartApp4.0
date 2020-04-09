@@ -24,10 +24,10 @@ import static com.example.smartapp.MainActivity.processMQTT;
 
 public class LightController extends AppCompatActivity {
 
-    //Button Red, Green, Blue, Yellow, Violet, Aqua, White, Power, More, Back;
-    LinearLayout More;
+    Button btnOn, btnOff;
+    ImageView More;
     ImageView Power, btnBack, btnDisconnect;
-    TextView tv_devicename;
+    TextView tv_devicename, txtStatus;
     public static TextView tv_color;
 
     SeekBar seekBar;
@@ -41,12 +41,6 @@ public class LightController extends AppCompatActivity {
     public static String electricDeviceName;
     public static String electricDeviceNode;
 
-
-
-
-    MQTTHelper mqttHelper;
-    //ProcessMQTT processMQTT = new ProcessMQTT();
-
     private RecyclerView recyclerView;
     private ArrayList<ColorModel> imageModelArrayList;
     private ColorAdapter adapter;
@@ -56,10 +50,15 @@ public class LightController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.light_controller);
 
+
+
         More = findViewById(R.id.btnMore);
-        Power = findViewById(R.id.btnPower);
+        btnOn =  findViewById(R.id.buttonOn);
+        btnOff =  findViewById(R.id.buttonOff);
+        //Power = findViewById(R.id.btnPower);
         btnBack = findViewById(R.id.buttonBack);
         btnDisconnect = findViewById(R.id.buttonDisconnect);
+        txtStatus = findViewById(R.id.textStatus);
 
         ArrayList<ColorModel> lstColor = new ArrayList<>();
 
@@ -78,19 +77,7 @@ public class LightController extends AppCompatActivity {
         lstColor.add(colorModel5);
         lstColor.add(colorModel6);
         lstColor.add(colorModel7);
-        /*
-        Red = (Button) findViewById(R.id.btnRed);
-        Green = (Button) findViewById(R.id.btnGreen);
-        Blue = (Button) findViewById(R.id.btnBlue);
-        Yellow = (Button) findViewById(R.id.btnYellow);
-        Violet = (Button) findViewById(R.id.btnViolet);
-        Aqua = (Button) findViewById(R.id.btnAqua);
-        White = (Button) findViewById(R.id.btnWhite);
-        Power = (Button) findViewById(R.id.btnPower);
-        More = (Button) findViewById(R.id.btnMore);
 
-        Back = (Button) findViewById(R.id.btnBack);
-        */
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
@@ -104,16 +91,13 @@ public class LightController extends AppCompatActivity {
 
         seekBar = (SeekBar) findViewById(R.id.seekValue);
 
+        if(TabDeviceController.turnIt == 0) {
+            btnDisconnect.setVisibility(View.GONE);
+        }
 
-
-        Bundle bundle = getIntent().getExtras();
-        //final String Id = bundle.getString("ID");
-        //final String Name_device = bundle.getString("NAME");
         tv_devicename.setText(electricDeviceName);
 
         mes = "255255255" + electricDeviceId;
-
-
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -151,15 +135,8 @@ public class LightController extends AppCompatActivity {
             }
         });
 
-        //processMQTT.Disconnect();
-
-
-
         if(color_custom == 1){
             GetColorCustom(electricDeviceId);
-        } else {
-            //processMQTT.Disconnect();
-
         }
 
         btnDisconnect.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +168,23 @@ public class LightController extends AppCompatActivity {
             }
         });
 
+        btnOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                processMQTT.SentMessege(electricDeviceNode,"255255255"+electricDeviceId,LightController.this);
+                txtStatus.setText("ON");
+            }
+        });
+
+
+        btnOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                processMQTT.SentMessege(electricDeviceNode,"000000000"+electricDeviceId,LightController.this);
+                txtStatus.setText("OFF");
+            }
+        });
+/*
         Power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,7 +200,7 @@ public class LightController extends AppCompatActivity {
                 Log.d("qoobee","mes: "+messeger);
             }
         });
-
+*/
 
 
 

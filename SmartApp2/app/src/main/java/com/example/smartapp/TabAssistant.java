@@ -264,7 +264,7 @@ public class TabAssistant extends Fragment {
     public void SendRequest(final String request) {
 //http://assistanthome.somee.com/api/assistant?request=
         Ion.with(this)
-                .load("http://assistanthome.somee.com/api/assistant?request=" + request)
+                .load("http://www.assistanthome.somee.com/api/assistant?request=" + request)
                 .asString()
                 .setCallback(new FutureCallback<String>() {
                     @Override
