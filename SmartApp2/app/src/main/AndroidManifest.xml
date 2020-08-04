@@ -31,7 +31,8 @@
         <activity android:name=".ScanDevice" />
         <activity android:name=".ColorPicker" />
         <activity android:name=".HouseScenario" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Authorization.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
