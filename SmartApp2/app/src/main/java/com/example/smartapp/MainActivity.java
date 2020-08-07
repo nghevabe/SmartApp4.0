@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.smartapp.Authorization.LoginActivity;
 import com.example.smartapp.DeviceController.ProcessMQTT;
 import com.google.android.material.tabs.TabLayout;
 import com.koushikdutta.async.future.FutureCallback;
@@ -82,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(2).setIcon( R.drawable.device_icon);
 
         processMQTT.startMqtt(MainActivity.this);
+
+        String userToken = getIntent().getStringExtra("EXTRA_TOKEN");
+
+        Toast.makeText(MainActivity.this.getApplicationContext(), userToken, Toast.LENGTH_SHORT).show();
 
 
         setupPermission.SetupAudio(MainActivity.this);
