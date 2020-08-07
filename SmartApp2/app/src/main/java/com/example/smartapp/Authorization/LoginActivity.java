@@ -45,12 +45,16 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userName = editTextUserName.getText().toString();
-                String passWord = editTextPassword.getText().toString();
+//                String userName = editTextUserName.getText().toString();
+//                String passWord = editTextPassword.getText().toString();
+//
+//                UserParams userParams = new UserParams(userName,passWord);
+//
+//                login(userParams);
 
-                UserParams userParams = new UserParams(userName,passWord);
-
-                login(userParams);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                //intent.putExtra("EXTRA_TOKEN", response.body());
+                LoginActivity.this.startActivity(intent);
             }
         });
 

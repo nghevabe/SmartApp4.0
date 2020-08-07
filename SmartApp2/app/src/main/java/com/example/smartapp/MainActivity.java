@@ -64,29 +64,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
-
-
         adapter = new TabAdapter(getSupportFragmentManager());
+        adapter.addFragment(new TabProfile(), "Profile");
         adapter.addFragment(new TabAssistant(), "Assistant");
-        adapter.addFragment(new TabHomeController(), "My Home");
+        adapter.addFragment(new TabHomeController(), "House");
         adapter.addFragment(new TabDeviceController(), "Device");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon( R.drawable.bot_icon);
-        tabLayout.getTabAt(1).setIcon( R.drawable.house_icon);
-        tabLayout.getTabAt(2).setIcon( R.drawable.device_icon);
+        tabLayout.getTabAt(0).setIcon( R.drawable.ic_user_gray);
+        tabLayout.getTabAt(1).setIcon( R.drawable.bot_icon);
+        tabLayout.getTabAt(2).setIcon( R.drawable.house_icon);
+        tabLayout.getTabAt(3).setIcon( R.drawable.device_icon);
 
         processMQTT.startMqtt(MainActivity.this);
 
-        String userToken = getIntent().getStringExtra("EXTRA_TOKEN");
-
-        Toast.makeText(MainActivity.this.getApplicationContext(), userToken, Toast.LENGTH_SHORT).show();
+//        String userToken = getIntent().getStringExtra("EXTRA_TOKEN");
+//
+//        Toast.makeText(MainActivity.this.getApplicationContext(), userToken, Toast.LENGTH_SHORT).show();
 
 
         setupPermission.SetupAudio(MainActivity.this);
