@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="320dp"
@@ -25,7 +24,6 @@
         app:layout_constraintEnd_toEndOf="@+id/ivLogo"
         app:layout_constraintStart_toStartOf="@+id/ivLogo"
         app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
-
 
     <EditText
         android:id="@+id/edUserName"
@@ -77,7 +75,6 @@
         app:layout_constraintTop_toTopOf="@id/edPassword"
         app:layout_constraintBottom_toBottomOf="@id/edPassword" />
 
-
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
@@ -120,7 +117,6 @@
             app:layout_constraintBottom_toBottomOf="@id/tvNotRegister"
             app:layout_constraintStart_toEndOf="@+id/tvNotRegister"
             app:layout_constraintTop_toTopOf="@+id/tvNotRegister" />
-
 
     </LinearLayout>
 
