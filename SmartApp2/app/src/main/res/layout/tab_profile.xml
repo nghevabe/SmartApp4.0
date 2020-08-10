@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <View
         android:id="@+id/vHeaderBackground"
@@ -22,7 +23,7 @@
         app:layout_constraintStart_toStartOf="@id/tvUserName"
         app:layout_constraintEnd_toEndOf="@id/tvUserName"
         app:layout_constraintBottom_toTopOf="@id/tvUserName"
-        android:text="Tran Hoang Linh"/>
+        tools:text="Tran Hoang Linh"/>
 
     <TextView
         android:id="@+id/tvUserName"
@@ -35,7 +36,7 @@
         app:layout_constraintStart_toStartOf="@id/vHeaderBackground"
         app:layout_constraintEnd_toEndOf="@id/vHeaderBackground"
         app:layout_constraintBottom_toBottomOf="@id/vHeaderBackground"
-        android:text="nghevabe"/>
+        tools:text="nghevabe"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -105,6 +106,7 @@
               app:srcCompat="@drawable/ic_mail_primary" />
           
           <TextView
+              android:id="@+id/tvMail"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               app:layout_constraintStart_toEndOf="@id/ivMail"
@@ -113,7 +115,7 @@
               app:layout_constraintBottom_toBottomOf="@id/ivMail"
               android:paddingStart="24dp"
               android:textSize="16dp"
-              android:text="linhthgc00913@yahoo.com.vn"/>
+              tools:text="linhthgc00913@yahoo.com.vn"/>
 
           <ImageView
               android:id="@+id/ivPhone"
@@ -126,6 +128,7 @@
               app:srcCompat="@drawable/ic_phone_primary"/>
 
           <TextView
+              android:id="@+id/tvPhone"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               app:layout_constraintStart_toEndOf="@id/ivPhone"
@@ -134,7 +137,7 @@
               app:layout_constraintBottom_toBottomOf="@id/ivPhone"
               android:paddingStart="24dp"
               android:textSize="16dp"
-              android:text="0949975730"/>
+              tools:text="0949975730"/>
 
           <ImageView
               android:id="@+id/ivAddress"
@@ -147,6 +150,7 @@
               app:srcCompat="@drawable/ic_location_primary"/>
 
           <TextView
+              android:id="@+id/tvAddress"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               app:layout_constraintStart_toEndOf="@id/ivAddress"
@@ -155,7 +159,7 @@
               app:layout_constraintBottom_toBottomOf="@id/ivAddress"
               android:paddingStart="24dp"
               android:textSize="16dp"
-              android:text="Ngo 12 Lang ha"/>
+              tools:text="Ngo 12 Lang ha"/>
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 

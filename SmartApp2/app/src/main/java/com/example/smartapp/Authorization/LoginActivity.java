@@ -25,17 +25,17 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public String token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTY4Njk2NDEsInVzZXJuYW1lIjoibGluaHRyYW4ifQ.PlYFqMChcCZ1pke3OAB2msTW9OYoZyUMGTLhuYHRV4U";
+    //public static String token = "";
     Button buttonLogin;
     EditText editTextUserName, editTextPassword;
-    private ApiService mService;
+    //private ApiService mService;
     private ApiServiceNoAuth mServiceNoAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-        mService = ApiUtils.getApiService(token);
+
         mServiceNoAuth = ApiUtils.getApiService();
 
         buttonLogin = findViewById(R.id.btnLogin);
@@ -45,41 +45,19 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String userName = editTextUserName.getText().toString();
-//                String passWord = editTextPassword.getText().toString();
-//
-//                UserParams userParams = new UserParams(userName,passWord);
-//
-//                login(userParams);
+                String userName = editTextUserName.getText().toString();
+                String passWord = editTextPassword.getText().toString();
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                //intent.putExtra("EXTRA_TOKEN", response.body());
-                LoginActivity.this.startActivity(intent);
+                UserParams userParams = new UserParams(userName,passWord);
+
+                login(userParams);
+
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                //intent.putExtra("EXTRA_TOKEN", response.body());
+//                LoginActivity.this.startActivity(intent);
             }
         });
 
-    }
-
-
-    public void loadUserDetailAuthor() {
-        mService.getUserDetailAuthor().enqueue(new Callback<User>() {
-
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()) {
-
-                    Log.d("MainActivity", "XXX: "+response.body().getFullname());
-                }else {
-                    int statusCode  = response.code();
-                    Log.d("MainActivity", "XXX: "+statusCode);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-
-            }
-        });
     }
 
 

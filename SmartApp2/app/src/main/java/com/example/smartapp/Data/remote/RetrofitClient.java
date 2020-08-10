@@ -1,5 +1,7 @@
 package com.example.smartapp.Data.remote;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -17,6 +19,7 @@ public class RetrofitClient {
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(String baseUrl, final String token) {
+        retrofit = null;
 
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -30,6 +33,7 @@ public class RetrofitClient {
             httpClient.addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
+                    Log.d("FINALXXX: ", "FINAL TOKEN: "+token);
                     Request request = chain.request().newBuilder().header("Authorization", token).build();
                     return chain.proceed(request);
                 }
