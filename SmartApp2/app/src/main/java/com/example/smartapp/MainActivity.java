@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,10 +76,21 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon( R.drawable.ic_person_outline);
-        tabLayout.getTabAt(1).setIcon( R.drawable.bot_icon);
-        tabLayout.getTabAt(2).setIcon( R.drawable.house_icon);
-        tabLayout.getTabAt(3).setIcon( R.drawable.device_icon);
+        View tab1 = getLayoutInflater().inflate(R.layout.custom_tab, null);
+        tab1.findViewById(R.id.ivIcon).setBackgroundResource(R.drawable.ic_person_outline);
+        tabLayout.getTabAt(0).setCustomView(tab1);
+
+        View tab2 = getLayoutInflater().inflate(R.layout.custom_tab, null);
+        tab2.findViewById(R.id.ivIcon).setBackgroundResource(R.drawable.ic_face_outline);
+        tabLayout.getTabAt(1).setCustomView(tab2);
+
+        View tab3 = getLayoutInflater().inflate(R.layout.custom_tab, null);
+        tab3.findViewById(R.id.ivIcon).setBackgroundResource(R.drawable.ic_home_outline);
+        tabLayout.getTabAt(2).setCustomView(tab3);
+
+        View tab4 = getLayoutInflater().inflate(R.layout.custom_tab, null);
+        tab4.findViewById(R.id.ivIcon).setBackgroundResource(R.drawable.ic_developer_board_outline);
+        tabLayout.getTabAt(3).setCustomView(tab4);
 
         processMQTT.startMqtt(MainActivity.this);
 
