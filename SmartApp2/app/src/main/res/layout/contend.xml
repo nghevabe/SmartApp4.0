@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/edInput"
@@ -16,39 +15,35 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:layout_toStartOf="@+id/sendBtn"
         android:background="@drawable/textbox"
         android:drawablePadding="10dp"
         android:hint="Input"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sendBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/sendBtn"
         app:layout_constraintEnd_toStartOf="@+id/sendBtn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/sendBtn"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_send"
+        android:backgroundTint="@color/colorGreyIcon"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:drawable/ic_menu_send"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/voiceBtn" />
+        app:layout_constraintTop_toTopOf="@id/voiceBtn"
+        app:layout_constraintEnd_toStartOf="@+id/voiceBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/voiceBtn" />
 
     <Button
         android:id="@+id/voiceBtn"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
-
-        android:background="@android:drawable/ic_btn_speak_now"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/ic_keyboard_voice"
+        android:backgroundTint="@color/colorGreyIcon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

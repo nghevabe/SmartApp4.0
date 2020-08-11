@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="10dp"
-    android:layout_width="140dp"
+    android:layout_width="160dp"
     android:layout_height="160dp">
 
 
@@ -11,32 +11,43 @@
         android:id="@+id/cardView6"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         app:cardCornerRadius="8dp"
+        cardElevation="10dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <ImageView
-            android:id="@+id/colorImg"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/colorImg"
+                android:background="@color/colorCalifornian"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+            <TextView
+                android:id="@+id/tvColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Blue"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
+
+
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Aqua"
-        android:gravity="center"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView6" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
