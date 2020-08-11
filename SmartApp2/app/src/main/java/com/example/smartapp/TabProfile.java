@@ -36,11 +36,11 @@ public class TabProfile extends Fragment {
         textViewPhone = view.findViewById(R.id.tvPhone);
         textViewAddress = view.findViewById(R.id.tvAddress);
 
-        String userToken = getActivity().getIntent().getStringExtra("EXTRA_TOKEN");
+        //String userToken = getActivity().getIntent().getStringExtra("EXTRA_TOKEN");
 
-        mService = ApiUtils.getApiService(userToken);
+       // mService = ApiUtils.getApiService(userToken);
 
-        getUserDetailAuthorApi();
+        //getUserDetailAuthorApi();
 
         return view;
     }

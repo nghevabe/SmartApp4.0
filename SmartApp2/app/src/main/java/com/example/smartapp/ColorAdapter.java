@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import static com.example.smartapp.LightController.electricDeviceNode;
+import static com.example.smartapp.LightController.tv_color;
 import static com.example.smartapp.MainActivity.processMQTT;
 import static com.example.smartapp.LightController.mes;
 import static com.example.smartapp.LightController.color_custom;
@@ -54,42 +55,49 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
         if(color.equals("Red"))
         {
             holder.cl.setBackgroundResource(R.color.colorRed);
+            holder.colorname.setText("Red");
 
         }
 
         if(color.equals("Green"))
         {
             holder.cl.setBackgroundResource(R.color.colorGreen);
+            holder.colorname.setText("Green");
 
         }
 
         if(color.equals("Blue"))
         {
             holder.cl.setBackgroundResource(R.color.colorBlue);
+            holder.colorname.setText("Blue");
 
         }
 
         if(color.equals("Yellow"))
         {
             holder.cl.setBackgroundResource(R.color.colorYellow);
+            holder.colorname.setText("Yellow");
 
         }
 
         if(color.equals("Violet"))
         {
             holder.cl.setBackgroundResource(R.color.colorViolet);
+            holder.colorname.setText("Violet");
 
         }
 
         if(color.equals("Aqua"))
         {
             holder.cl.setBackgroundResource(R.color.colorAqua);
+            holder.colorname.setText("Aqua");
 
         }
 
         if(color.equals("White"))
         {
             holder.cl.setBackgroundResource(R.color.colorCard);
+            holder.colorname.setText("White");
 
         }
 
@@ -109,7 +117,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            colorname = (TextView) itemView.findViewById(R.id.tv);
+            colorname = (TextView) itemView.findViewById(R.id.tvColor);
             cl = (ImageView) itemView.findViewById(R.id.colorImg);
 
             itemView.setOnClickListener(this);
