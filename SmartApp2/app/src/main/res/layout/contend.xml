@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/edInput"
@@ -32,10 +31,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="10dp"
-        android:background="@android:drawable/ic_menu_send"
+        android:background="@drawable/ic_send"
+        android:backgroundTint="@color/colorGreyIcon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/voiceBtn" />
 
@@ -47,8 +46,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="10dp"
-
-        android:background="@android:drawable/ic_btn_speak_now"
+        android:background="@drawable/ic_keyboard_voice"
+        android:backgroundTint="@color/colorGreyIcon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
