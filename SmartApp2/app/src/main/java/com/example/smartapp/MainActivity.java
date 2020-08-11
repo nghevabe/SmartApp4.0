@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon( R.drawable.ic_user_gray);
+        tabLayout.getTabAt(0).setIcon( R.drawable.ic_person_outline);
         tabLayout.getTabAt(1).setIcon( R.drawable.bot_icon);
         tabLayout.getTabAt(2).setIcon( R.drawable.house_icon);
         tabLayout.getTabAt(3).setIcon( R.drawable.device_icon);

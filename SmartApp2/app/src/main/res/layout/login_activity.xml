@@ -45,7 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:elevation="5dp"
-        android:background="@drawable/ic_user_gray"
+        android:background="@drawable/ic_person_outline"
+        android:backgroundTint="@color/colorGreyIcon"
         app:layout_constraintStart_toStartOf="@id/edUserName"
         app:layout_constraintTop_toTopOf="@id/edUserName"
         app:layout_constraintBottom_toBottomOf="@id/edUserName" />
@@ -70,7 +71,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:elevation="5dp"
-        android:background="@drawable/ic_password_gray"
+        android:background="@drawable/ic_lock_outline"
+        android:backgroundTint="@color/colorGreyIcon"
         app:layout_constraintStart_toStartOf="@id/edPassword"
         app:layout_constraintTop_toTopOf="@id/edPassword"
         app:layout_constraintBottom_toBottomOf="@id/edPassword" />

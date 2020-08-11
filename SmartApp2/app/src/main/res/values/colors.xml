@@ -16,4 +16,6 @@
     <color name="colorCalifornian">#3DDAD7</color>
     <color name="colorChill">#AED9DA</color>
     <color name="colorBlack">#000000</color>
+
+    <color name="colorGreyIcon">#A9A9A9</color>
 </resources>
