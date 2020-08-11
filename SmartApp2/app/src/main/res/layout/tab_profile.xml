@@ -141,25 +141,24 @@
         android:elevation="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="150dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/glCardFooter"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/glCardFooter">
 
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
-          android:layout_height="match_parent">
+          android:layout_height="wrap_content"
+          android:paddingTop="48dp"
+          android:paddingBottom="48dp">
 
           <ImageView
               android:id="@+id/ivMail"
-              android:layout_width="30dp"
-              android:layout_height="30dp"
+              android:layout_width="24dp"
+              android:layout_height="24dp"
               android:layout_marginStart="16dp"
-              android:layout_marginTop="16dp"
+              android:tint="@color/colorPrimary"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
-              app:srcCompat="@drawable/ic_mail_primary" />
+              app:srcCompat="@drawable/ic_mail_outline" />
           
           <TextView
               android:id="@+id/tvMail"
@@ -175,13 +174,14 @@
 
           <ImageView
               android:id="@+id/ivPhone"
-              android:layout_width="30dp"
-              android:layout_height="30dp"
+              android:layout_width="24dp"
+              android:layout_height="24dp"
               android:layout_marginStart="16dp"
               android:layout_marginTop="16dp"
+              android:tint="@color/colorPrimary"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@id/ivMail"
-              app:srcCompat="@drawable/ic_phone_primary"/>
+              app:srcCompat="@drawable/ic_phone_outline"/>
 
           <TextView
               android:id="@+id/tvPhone"
@@ -197,13 +197,14 @@
 
           <ImageView
               android:id="@+id/ivAddress"
-              android:layout_width="30dp"
-              android:layout_height="30dp"
+              android:layout_width="24dp"
+              android:layout_height="24dp"
               android:layout_marginStart="16dp"
               android:layout_marginTop="16dp"
+              android:tint="@color/colorPrimary"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@id/ivPhone"
-              app:srcCompat="@drawable/ic_location_primary"/>
+              app:srcCompat="@drawable/ic_location_outline"/>
 
           <TextView
               android:id="@+id/tvAddress"
