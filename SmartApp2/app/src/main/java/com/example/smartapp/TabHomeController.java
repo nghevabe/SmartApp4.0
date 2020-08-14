@@ -50,7 +50,7 @@ public class TabHomeController extends Fragment {
        // btnScenario = view.findViewById(R.id.);
         btnSetup = view.findViewById(R.id.buttonSetup);
         btnScenario = view.findViewById(R.id.buttonScenario);
-        nofbtn = view.findViewById(R.id.notifyButton);
+        nofbtn = view.findViewById(R.id.ivNotify);
 
         ArrayList<ElectricDevice> lstDevice = new ArrayList<>();
 
@@ -72,7 +72,7 @@ public class TabHomeController extends Fragment {
         lstDevice.add(device6);
         lstDevice.add(device7);
 
-        imgDot = view.findViewById(R.id.imageDot);
+        imgDot = view.findViewById(R.id.ivDot);
 
 
         if(SetupData.lstNof.size() == 0){
