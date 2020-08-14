@@ -68,7 +68,7 @@ public class LightController extends AppCompatActivity {
         ColorModel colorModel4 = new ColorModel("255255000" + electricDeviceId,"Yellow");
         ColorModel colorModel5 = new ColorModel("255000255" + electricDeviceId,"Violet");
         ColorModel colorModel6 = new ColorModel("000255255" + electricDeviceId,"Aqua");
-        ColorModel colorModel7 = new ColorModel("255155255" + electricDeviceId,"White");
+        ColorModel colorModel7 = new ColorModel("255255255" + electricDeviceId,"White");
 
         lstColor.add(colorModel1);
         lstColor.add(colorModel2);
@@ -77,8 +77,7 @@ public class LightController extends AppCompatActivity {
         lstColor.add(colorModel5);
         lstColor.add(colorModel6);
         lstColor.add(colorModel7);
-
-
+        
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
         adapter = new ColorAdapter(this, lstColor);

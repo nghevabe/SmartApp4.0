@@ -6,6 +6,7 @@
     <color name="colorCard">#ffffff</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorGrey">#cccccc</color>
+    <color name="colorGrayInput">#EEEEEE</color>
     <color name="colorRed">#8B0000</color>
     <color name="colorGreen">#00FF00</color>
     <color name="colorBlue">#0000FF</color>
