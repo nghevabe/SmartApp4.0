@@ -72,6 +72,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             holder.devicePhoto.setImageResource(R.drawable.fan_icon);
         }
 
+        if(electricDevice.type.contains("purifier")){
+            holder.devicePhoto.setImageResource(R.drawable.purifier);
+        }
+
         if(electricDevice.type.contains("glass")){
             holder.devicePhoto.setImageResource(R.drawable.glass);
         }
@@ -179,6 +183,21 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                     context.startActivity(intent);
                 }
+
+                if(electricDevice.type.contains("purifier")) {
+                   Intent intent = new Intent(context, PurifierController.class);
+                   Bundle bundle = new Bundle();
+
+                   bundle.putString("ID", electricDevice.id);
+                   bundle.putString("NAME", electricDevice.name);
+                   intent.putExtras(bundle);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                   electricDeviceId = electricDevice.id;
+                   electricDeviceName = electricDevice.name;
+
+                   context.startActivity(intent);
+                 }
 
                 if(electricDevice.type.contains("glass")) {
                     Intent intent = new Intent(context, GlassController.class);

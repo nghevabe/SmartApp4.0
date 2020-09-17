@@ -59,9 +59,9 @@ public class TabHomeController extends Fragment {
         ElectricDevice device2 = new ElectricDevice("2","Đèn phòng ngủ","light","none", "ESP_01");
         ElectricDevice device3 = new ElectricDevice("3","Đèn phòng khách","light","none","ESP_01");
         ElectricDevice device4 = new ElectricDevice("4","Quạt phòng khách","fan","none","ESP_02");
-        ElectricDevice device5 = new ElectricDevice("5","Hệ thống lọc khí","fan","none","ESP_02");
-        ElectricDevice device6 = new ElectricDevice("6","Kính thông minh","glass","none","ESP_03");
-        ElectricDevice device7 = new ElectricDevice("7","Cửa","door","none","ESP_04");
+        ElectricDevice device5 = new ElectricDevice("5","Hệ thống lọc khí","purifier","none","ESP_03");
+        ElectricDevice device6 = new ElectricDevice("6","Kính thông minh","glass","none","ESP_04");
+        ElectricDevice device7 = new ElectricDevice("7","Cửa","door","none","ESP_05");
         //ElectricDevice device4 = new ElectricDevice("4","Đèn sân","light","none");
 
         lstDevice.add(device1);

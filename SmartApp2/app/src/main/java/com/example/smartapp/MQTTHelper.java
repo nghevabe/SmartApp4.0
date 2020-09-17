@@ -16,7 +16,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MQTTHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    final String serverUri = "tcp://tailor.cloudmqtt.com:11359";
+    final String serverUri = "tcp://broker.mqttdashboard.com:1883";
 
     final String clientId = "linhtran02";
     final String subscriptionTopic7 = "SMART_PROJECT/ESP_07";
@@ -61,8 +61,8 @@ public class MQTTHelper {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        mqttConnectOptions.setUserName(username);
-        mqttConnectOptions.setPassword(password.toCharArray());
+        //mqttConnectOptions.setUserName(username);
+        //mqttConnectOptions.setPassword(password.toCharArray());
 
         try {
 
