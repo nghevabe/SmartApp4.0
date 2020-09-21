@@ -58,7 +58,7 @@ public class LightController extends AppCompatActivity {
         //Power = findViewById(R.id.btnPower);
         btnBack = findViewById(R.id.buttonBack);
         btnDisconnect = findViewById(R.id.buttonDisconnect);
-        txtStatus = findViewById(R.id.textStatus);
+        txtStatus = findViewById(R.id.tvStatus);
 
         ArrayList<ColorModel> lstColor = new ArrayList<>();
 

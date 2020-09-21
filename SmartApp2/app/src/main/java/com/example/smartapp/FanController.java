@@ -36,7 +36,7 @@ public class FanController extends AppCompatActivity {
         btnOn =  findViewById(R.id.buttonOn);
         btnOff =  findViewById(R.id.buttonOff);
         btnBack =  findViewById(R.id.buttonBack);
-        txtStatus = findViewById(R.id.textStatus);
+        txtStatus = findViewById(R.id.tvStatus);
 
 
         btnOn.setOnClickListener(new View.OnClickListener() {

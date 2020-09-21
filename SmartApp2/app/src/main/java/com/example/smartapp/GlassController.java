@@ -32,7 +32,7 @@ public class GlassController extends AppCompatActivity {
         btnOn =  findViewById(R.id.buttonOn);
         btnOff =  findViewById(R.id.buttonOff);
         btnBack =  findViewById(R.id.buttonBack);
-        txtStatus = findViewById(R.id.textStatus);
+        txtStatus = findViewById(R.id.tvStatus);
 
         powerBar = (SeekBar) findViewById(R.id.seekBar);
 
@@ -41,7 +41,7 @@ public class GlassController extends AppCompatActivity {
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                processMQTT.SentMessege("ESP_03","ON0",GlassController.this);
+                processMQTT.SentMessege("ESP_04","ON0",GlassController.this);
                 txtStatus.setText("ON");
             }
         });
@@ -50,7 +50,7 @@ public class GlassController extends AppCompatActivity {
         btnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                processMQTT.SentMessege("ESP_03","OFF0",GlassController.this);
+                processMQTT.SentMessege("ESP_04","OFF0",GlassController.this);
                 txtStatus.setText("OFF");
             }
         });
@@ -84,7 +84,7 @@ public class GlassController extends AppCompatActivity {
                 Log.d("xbox", "value: " + valuePower);
 
                 String mes = (int)valuePower + "0";
-                processMQTT.SentMessege("ESP_03",mes,GlassController.this);
+                processMQTT.SentMessege("ESP_04",mes,GlassController.this);
 
             }
         });

@@ -25,7 +25,7 @@ public class DoorController extends AppCompatActivity {
         btnOn =  findViewById(R.id.buttonOn);
         btnOff =  findViewById(R.id.buttonOff);
         btnBack =  findViewById(R.id.buttonBack);
-        txtStatus = findViewById(R.id.textStatus);
+        txtStatus = findViewById(R.id.tvStatus);
 
 
 
@@ -33,7 +33,7 @@ public class DoorController extends AppCompatActivity {
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                processMQTT.SentMessege("ESP_04","ON0",DoorController.this);
+                processMQTT.SentMessege("ESP_05","ON0",DoorController.this);
                 txtStatus.setText("ON");
             }
         });
@@ -42,7 +42,7 @@ public class DoorController extends AppCompatActivity {
         btnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                processMQTT.SentMessege("ESP_04","OFF0",DoorController.this);
+                processMQTT.SentMessege("ESP_05","OFF0",DoorController.this);
                 txtStatus.setText("OFF");
             }
         });

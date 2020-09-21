@@ -25,12 +25,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/line8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
 
     <SeekBar
         android:id="@+id/seekValue"
@@ -57,41 +51,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/line8" />
+        app:layout_constraintTop_toBottomOf="@+id/cvControllerBlock" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="180dp"
-        app:layout_constraintBottom_toTopOf="@+id/line8"
+        android:layout_marginBottom="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-
-
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -167,78 +148,61 @@
         app:layout_constraintGuide_percent="0.13" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvControllerBlock"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
         app:cardCornerRadius="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/line8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recycler">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp">
 
             <Button
                 android:id="@+id/buttonOn"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="8dp"
                 android:background="@drawable/button_fill"
                 android:text="ON"
                 android:textColor="@color/colorCard"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline31"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintEnd_toStartOf="@+id/buttonOff"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline31"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
+                app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
 
             <Button
                 android:id="@+id/buttonOff"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="8dp"
                 android:background="@drawable/button_nofill"
                 android:text="OFF"
                 android:textColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline31"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline32"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/buttonOn"
+                app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
 
             <TextView
-                android:id="@+id/textStatus"
+                android:id="@+id/tvStatus"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="ON"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline32"
+                android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
