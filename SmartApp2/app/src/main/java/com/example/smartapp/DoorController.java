@@ -21,14 +21,10 @@ public class DoorController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.door_controller);
 
-
         btnOn =  findViewById(R.id.buttonOn);
         btnOff =  findViewById(R.id.buttonOff);
         btnBack =  findViewById(R.id.buttonBack);
         txtStatus = findViewById(R.id.tvStatus);
-
-
-
 
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +33,6 @@ public class DoorController extends AppCompatActivity {
                 txtStatus.setText("ON");
             }
         });
-
 
         btnOff.setOnClickListener(new View.OnClickListener() {
             @Override
