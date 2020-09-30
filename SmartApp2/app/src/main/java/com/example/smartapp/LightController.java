@@ -50,8 +50,6 @@ public class LightController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.light_controller);
 
-
-
         More = findViewById(R.id.btnMore);
         btnOn =  findViewById(R.id.buttonOn);
         btnOff =  findViewById(R.id.buttonOff);
