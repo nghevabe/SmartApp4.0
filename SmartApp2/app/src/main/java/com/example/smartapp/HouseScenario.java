@@ -50,13 +50,10 @@ public class HouseScenario extends AppCompatActivity {
                     // Turn On Led White
                     processMQTT.SentMessege("ESP_01","2552552553", HouseScenario.this);
 
-
                     //
-
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-
                             // Open Door
                             processMQTT.SentMessege("ESP_04","ON0", HouseScenario.this);
 
@@ -76,8 +73,6 @@ public class HouseScenario extends AppCompatActivity {
                 }
 
                 if(b == false){
-
-
 
                 }
 
@@ -117,18 +112,15 @@ public class HouseScenario extends AppCompatActivity {
                         }
                     }, 2000);
 
-
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-
                             // Turn off glass.
                             processMQTT.SentMessege("ESP_03","OFF0", HouseScenario.this);
 
                         }
                     }, 3000);
                 }
-
 
                 if(b == false){
 
