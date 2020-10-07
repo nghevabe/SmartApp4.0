@@ -31,7 +31,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
             android:gravity="center"
-            android:text="Notification"
+            android:text="@string/title_notification_txt"
             android:textColor="@color/colorCard"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"

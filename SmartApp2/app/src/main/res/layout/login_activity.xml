@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="16dp"
-        android:text="Welcome IoT Smart App 4.0 "
+        android:text="@string/title_greeting_txt"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/ivLogo"
         app:layout_constraintStart_toStartOf="@+id/ivLogo"
@@ -34,7 +34,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/bg_rounded_input_gray"
         android:elevation="5dp"
-        android:hint="username"
+        android:hint="@string/hint_username_edt"
         android:paddingStart="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitleApp" />
@@ -60,7 +60,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/bg_rounded_input_gray"
         android:elevation="5dp"
-        android:hint="password"
+        android:hint="@string/hint_password_edt"
         android:paddingStart="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edUserName" />
@@ -86,7 +86,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/bg_rounded_button_primary"
         android:elevation="10dp"
-        android:text="LOGIN"
+        android:text="@string/login_button"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edPassword" />
@@ -106,14 +106,14 @@
             android:id="@+id/tvNotRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Not registered?"
+            android:text="@string/not_register_txt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create an account"
+            android:text="@string/create_account_txt"
             android:textColor="#008577"
             android:paddingStart="4dp"
             app:layout_constraintBottom_toBottomOf="@id/tvNotRegister"
