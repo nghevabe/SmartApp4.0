@@ -14,8 +14,6 @@
         app:layout_constraintGuide_percent="0.2" />
 
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
         android:layout_width="0dp"
@@ -111,7 +109,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/button_fill"
-                android:text="ON"
+                android:text="@string/on_button"
                 android:textColor="@color/colorCard"
                 app:layout_constraintEnd_toStartOf="@+id/buttonOff"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -126,7 +124,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/button_nofill"
-                android:text="OFF"
+                android:text="@string/off_button"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

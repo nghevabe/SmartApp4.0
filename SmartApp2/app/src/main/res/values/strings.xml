@@ -5,4 +5,53 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+
+    <string name="title_greeting_txt">Welcome IoT Smart App 4.0</string>
+    <string name="title_notification_txt">Notification</string>
+    <string name="title_choose_scenario_txt">Choose Your Scenario</string>
+    <string name="title_setup_home_txt">Setup Your Home</string>
+
+    <string name="not_register_txt">Not registered?</string>
+    <string name="create_account_txt">Create an account</string>
+
+    <string name="house_device_txt">House Device</string>
+    <string name="remote_device_txt">Remote Device</string>
+    <string name="list_devices_txt">List Devices</string>
+    <string name="connected_device_txt">Connected Device</string>
+    <string name="no_devices_connected_txt">No devices have been connected yet</string>
+    <string name="brightness_txt">Brightness</string>
+    <string name="wind_power_txt">Wind Power</string>
+    <string name="transparent_txt">Transparent</string>
+    <string name="smart_mode_txt">Smart mode</string>
+
+    <string name="welcome_txt">Welcome</string>
+    <string name="relax_txt">Relax</string>
+    <string name="sleeping_txt">Sleeping</string>
+    <string name="save_electric_txt">Save Electricity</string>
+    <string name="air_purifier_txt">Smart Air Purifier</string>
+    <string name="smart_electric_glasses_txt">Smart Electric Glasses</string>
+
+    <string name="content_welcome_txt">Use when guests come home. Lights and door are automatically opened</string>
+    <string name="content_relax_txt">Moderate lighting system, accompanied by music to create a relaxing feeling</string>
+    <string name="content_sleeping_txt">Security mode is set, bedroom lights are dimmed to help you fall asleep</string>
+
+    <string name="content_safe_electric_txt">The lights in the room will turn on automatically whenever someone is present. And will turn itself off when no one is left</string>
+    <string name="content_air_purifier_txt">Automatically opens the air purification system when the air in the room reaches an alarmed level</string>
+    <string name="content_electric_glasses_txt">Automatically adjusts transparency to suit the outdoor lighting conditions</string>
+
+    <string name="hint_username_edt">username</string>
+    <string name="hint_password_edt">password</string>
+    <string name="hint_input_edt">Input</string>
+
+    <string name="login_button">LOGIN</string>
+    <string name="scenario_button">Scenario</string>
+    <string name="setup_button">Setup</string>
+    <string name="add_device_button">Add Device</string>
+    <string name="more_button">More</string>
+    <string name="on_button">ON</string>
+    <string name="off_button">OFF</string>
+    <string name="choose_button">CHOOSE</string>
+    <string name="suggest_button">Suggestion</string>
+    <string name="active_button">Active</string>
+
 </resources>

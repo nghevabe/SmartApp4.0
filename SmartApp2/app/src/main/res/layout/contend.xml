@@ -18,7 +18,7 @@
         android:layout_toStartOf="@+id/sendBtn"
         android:background="@drawable/textbox"
         android:drawablePadding="10dp"
-        android:hint="Input"
+        android:hint="@string/hint_input_edt"
         android:padding="8dp"
         app:layout_constraintTop_toTopOf="@id/sendBtn"
         app:layout_constraintBottom_toBottomOf="@+id/sendBtn"
@@ -55,8 +55,6 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="100dp"
-
-        android:text="Hello"
         android:textSize="144sp"
         app:layout_constraintBottom_toTopOf="@+id/edInput"
         app:layout_constraintEnd_toEndOf="parent"
