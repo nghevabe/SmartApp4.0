@@ -10,12 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.smartapp.ApiUtils;
-import com.example.smartapp.Data.model.User;
+import com.example.smartapp.Utils.ApiUtils;
 import com.example.smartapp.Data.model.UserParams;
-import com.example.smartapp.Data.remote.ApiService;
 import com.example.smartapp.Data.remote.ApiServiceNoAuth;
-import com.example.smartapp.HouseNotify;
 import com.example.smartapp.MainActivity;
 import com.example.smartapp.R;
 

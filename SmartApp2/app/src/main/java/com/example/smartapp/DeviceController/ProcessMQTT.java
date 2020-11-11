@@ -9,15 +9,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.smartapp.HouseNotify;
-import com.example.smartapp.MQTTHelper;
-import com.example.smartapp.Notificationer;
-import com.example.smartapp.NotifyAdapter;
+import com.example.smartapp.Main.HouseNotify;
+import com.example.smartapp.Utils.MQTTHelper;
+import com.example.smartapp.Notify.Notificationer;
+import com.example.smartapp.Notify.NotifyAdapter;
 import com.example.smartapp.R;
-import com.example.smartapp.SetupData;
-import com.example.smartapp.TabHomeController;
+import com.example.smartapp.Utils.SetupData;
+import com.example.smartapp.Main.TabHomeController;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -27,7 +26,6 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 
 public class ProcessMQTT {
 

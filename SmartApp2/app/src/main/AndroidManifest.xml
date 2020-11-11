@@ -25,16 +25,16 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize">
 
-        <activity android:name=".HouseNotify" />
-        <activity android:name=".HouseSetup" />
-        <activity android:name=".DoorController" />
-        <activity android:name=".GlassController" />
-        <activity android:name=".LightController" />
-        <activity android:name=".FanController" />
-        <activity android:name=".ScanDevice" />
-        <activity android:name=".ColorPicker" />
-        <activity android:name=".HouseScenario" />
-        <activity android:name=".PurifierController" />
+        <activity android:name=".Main.HouseNotify" />
+        <activity android:name=".Setup.HouseSetup" />
+        <activity android:name=".DeviceController.DoorController" />
+        <activity android:name=".DeviceController.GlassController" />
+        <activity android:name=".DeviceController.LightController" />
+        <activity android:name=".DeviceController.FanController" />
+        <activity android:name=".Scanning.ScanDevice" />
+        <activity android:name=".ColorSelector.ColorPicker" />
+        <activity android:name=".Scenario.HouseScenario" />
+        <activity android:name=".DeviceController.PurifierController" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Authorization.LoginActivity">
 

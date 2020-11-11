@@ -5,20 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.smartapp.DateTimeProcess;
 import com.example.smartapp.DeviceController.SmartProcess;
-import com.example.smartapp.StringProcess;
+import com.example.smartapp.Utils.StringProcess;
 import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.async.util.Charsets;
 import com.koushikdutta.ion.Ion;
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 
 import static com.example.smartapp.MainActivity.processMQTT;
 
