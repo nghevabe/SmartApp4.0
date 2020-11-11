@@ -11,8 +11,8 @@
     <string name="title_choose_scenario_txt">Choose Your Scenario</string>
     <string name="title_setup_home_txt">Setup Your Home</string>
 
-    <string name="not_register_txt">Not registered?</string>
-    <string name="create_account_txt">Create an account</string>
+    <string name="not_register_txt">Not have an account?</string>
+    <string name="create_account_txt">Experience application as a guest</string>
 
     <string name="house_device_txt">House Device</string>
     <string name="remote_device_txt">Remote Device</string>

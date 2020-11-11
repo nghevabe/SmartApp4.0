@@ -73,7 +73,7 @@ public class DateTimeProcess {
 
         String part = DateTime_cut[2];
         if(part.equals("PM")){
-            sHour = sHour - 12;
+            sHour = sHour;
         }
 
         sMinute = Integer.parseInt(minute);

@@ -108,7 +108,8 @@
             android:layout_height="wrap_content"
             android:text="@string/not_register_txt"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="wrap_content"
